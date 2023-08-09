@@ -48,92 +48,81 @@ struct ContentView: View {
             }
             VStack {
                 // Hitories
-                
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(style: StrokeStyle(lineWidth: 2))
+                    .frame(width: 300, height: 100)
+                    .foregroundColor(.black)
+                    .overlay(
+                        VStack(spacing: 10) {
+                            Text("Top Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                            
+                            
+                            Divider()
+                                .background(Color.gray)
+                                .frame(height: 1)
+                            
+                            Text("Bottom Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                        }
+                            .padding()
+                    )
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(style: StrokeStyle(lineWidth: 2))
+                    .frame(width: 300, height: 100)
+                    .foregroundColor(.black)
+                    .overlay(
+                        VStack(spacing: 10) {
+                            Text("Top Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                            
+                            
+                            Divider()
+                                .background(Color.gray)
+                                .frame(height: 1)
+                            
+                            Text("Bottom Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                        }
+                            .padding()
+                    )
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(style: StrokeStyle(lineWidth: 2))
+                    .frame(width: 300, height: 100)
+                    .foregroundColor(.black)
+                    .overlay(
+                        VStack(spacing: 10) {
+                            Text("Top Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                            
+                            
+                            Divider()
+                                .background(Color.gray)
+                                .frame(height: 1)
+                            
+                            Text("Bottom Example Text")
+                                .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity,  alignment: .leading)
+                        }
+                            .padding()
+                    )
             }
+            Spacer()
+
+            
             VStack {
                 // Texting & talking Buttons
-                VStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(style: StrokeStyle(lineWidth: 2))
-                        .frame(width: 300, height: 100)
-                        .foregroundColor(.black)
-                        .overlay(
-                            VStack(spacing: 10) {
-                                Text("Top Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                                
-                                
-                                Divider()
-                                    .background(Color.gray)
-                                    .frame(height: 1)
-                                
-                                Text("Bottom Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                            }
-                                .padding()
-                        )
-                    
-                    
-                }
-                VStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(style: StrokeStyle(lineWidth: 2))
-                        .frame(width: 300, height: 100)
-                        .foregroundColor(.black)
-                        .overlay(
-                            VStack(spacing: 10) {
-                                Text("Top Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                                
-                                
-                                Divider()
-                                    .background(Color.gray)
-                                    .frame(height: 1)
-                                
-                                Text("Bottom Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                            }
-                                .padding()
-                        )
-                    
-                    
-                }
-                VStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(style: StrokeStyle(lineWidth: 2))
-                        .frame(width: 300, height: 100)
-                        .foregroundColor(.black)
-                        .overlay(
-                            VStack(spacing: 10) {
-                                Text("Top Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                                
-                                
-                                Divider()
-                                    .background(Color.gray)
-                                    .frame(height: 1)
-                                
-                                Text("Bottom Example Text")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity,  alignment: .leading)
-                            }
-                                .padding()
-                        )
-                    
-                    
-                }
-                .padding()
                 
                 TextField("Type here", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
                     .frame(height: 40)
@@ -171,7 +160,6 @@ struct ContentView: View {
                     
                 }
             }
-            Spacer()
         }
         .padding()
     }
