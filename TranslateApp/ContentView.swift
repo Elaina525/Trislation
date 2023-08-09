@@ -44,7 +44,7 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(20)
-
+                
             }
             VStack {
                 // Hitories
@@ -62,7 +62,7 @@ struct ContentView: View {
                                 Text("Top Example Text")
                                     .font(.system(size: 16))
                                     .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
                                 
                                 
                                 Divider()
@@ -72,6 +72,61 @@ struct ContentView: View {
                                 Text("Bottom Example Text")
                                     .font(.system(size: 16))
                                     .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
+                            }
+                                .padding()
+                        )
+                    
+                    
+                }
+                VStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(style: StrokeStyle(lineWidth: 2))
+                        .frame(width: 300, height: 100)
+                        .foregroundColor(.black)
+                        .overlay(
+                            VStack(spacing: 10) {
+                                Text("Top Example Text")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
+                                
+                                
+                                Divider()
+                                    .background(Color.gray)
+                                    .frame(height: 1)
+                                
+                                Text("Bottom Example Text")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
+                            }
+                                .padding()
+                        )
+                    
+                    
+                }
+                VStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(style: StrokeStyle(lineWidth: 2))
+                        .frame(width: 300, height: 100)
+                        .foregroundColor(.black)
+                        .overlay(
+                            VStack(spacing: 10) {
+                                Text("Top Example Text")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
+                                
+                                
+                                Divider()
+                                    .background(Color.gray)
+                                    .frame(height: 1)
+                                
+                                Text("Bottom Example Text")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity,  alignment: .leading)
                             }
                                 .padding()
                         )
@@ -112,8 +167,8 @@ struct ContentView: View {
                     .frame(width: 100,height: 35)
                     .background(Color(UIColor.lightGray))
                     .cornerRadius(8)
-
-
+                    
+                    
                 }
             }
             Spacer()
