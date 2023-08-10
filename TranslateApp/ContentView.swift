@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     var body: some View {
-        
-        Text("Hello World!")
-        
+        TabView {
+            HomePageView()
+                .tabItem {
+
+                    Text("Tab 1")
+                }
+
+
+            Text("This is the second tab view")
+                .tabItem {
+
+                    Text("Tab 2")
+                }
+        }
+        .tabViewStyle(PageTabViewStyle())
     }
 }
 
