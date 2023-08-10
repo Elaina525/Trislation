@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct HomePageView: View {
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(8)
-
+                
                 Button("History") {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                 }
@@ -29,7 +30,7 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(8)
-
+                
                 Button("Favourites") {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                 }
@@ -37,7 +38,7 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(8)
-
+                
                 Button {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                 } label: {
@@ -47,82 +48,23 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(20)
-
+                
             }
             VStack {
                 // Hitories
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(style: StrokeStyle(lineWidth: 2))
-                    .frame(width: 300, height: 100)
-                    .foregroundColor(.black)
-                    .overlay(
-                        VStack(spacing: 10) {
-                            Text("Top Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                            
-                            
-                            Divider()
-                                .background(Color.gray)
-                                .frame(height: 1)
-                            
-                            Text("Bottom Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                        }
-                            .padding()
-                    )
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(style: StrokeStyle(lineWidth: 2))
-                    .frame(width: 300, height: 100)
-                    .foregroundColor(.black)
-                    .overlay(
-                        VStack(spacing: 10) {
-                            Text("Top Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                            
-                            
-                            Divider()
-                                .background(Color.gray)
-                                .frame(height: 1)
-                            
-                            Text("Bottom Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                        }
-                            .padding()
-                    )
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(style: StrokeStyle(lineWidth: 2))
-                    .frame(width: 300, height: 100)
-                    .foregroundColor(.black)
-                    .overlay(
-                        VStack(spacing: 10) {
-                            Text("Top Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                            
-                            
-                            Divider()
-                                .background(Color.gray)
-                                .frame(height: 1)
-                            
-                            Text("Bottom Example Text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity,  alignment: .leading)
-                        }
-                            .padding()
-                    )
+                
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
             }
             Spacer()
-
+            
             
             VStack {
                 // Texting & talking Buttons
@@ -175,5 +117,36 @@ struct HomePageView: View {
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
         HomePageView()
+    }
+}
+
+
+struct TranslateTextRow: View {
+    let TopText: String
+    let BottomText: String
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 20)
+            .stroke(style: StrokeStyle(lineWidth: 2))
+            .frame(width: 300, height: 100)
+            .foregroundColor(.black)
+            .overlay(
+                VStack(spacing: 10) {
+                    Text(TopText)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                        .background(Color.gray)
+                        .frame(height: 1)
+                    
+                    Text(BottomText)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                    .padding()
+            )
     }
 }
