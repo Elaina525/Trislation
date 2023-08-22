@@ -11,6 +11,7 @@
 		729A2F932A7A2A69006A71FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A2F922A7A2A69006A71FA /* ContentView.swift */; };
 		729A2F952A7A2A6A006A71FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 729A2F942A7A2A6A006A71FA /* Assets.xcassets */; };
 		729A2F982A7A2A6A006A71FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 729A2F972A7A2A6A006A71FA /* Preview Assets.xcassets */; };
+		72C5EFCB2A94BD5A00444399 /* HistoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5EFCA2A94BD5A00444399 /* HistoryPageView.swift */; };
 		72CF3EE92A83645E007A4E23 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF3EE82A83645E007A4E23 /* HomePageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +21,7 @@
 		729A2F922A7A2A69006A71FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		729A2F942A7A2A6A006A71FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		729A2F972A7A2A6A006A71FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		72C5EFCA2A94BD5A00444399 /* HistoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPageView.swift; sourceTree = "<group>"; };
 		72CF3EE82A83645E007A4E23 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				72CF3EE82A83645E007A4E23 /* HomePageView.swift */,
+				72C5EFCA2A94BD5A00444399 /* HistoryPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				729A2F932A7A2A69006A71FA /* ContentView.swift in Sources */,
 				72CF3EE92A83645E007A4E23 /* HomePageView.swift in Sources */,
+				72C5EFCB2A94BD5A00444399 /* HistoryPageView.swift in Sources */,
 				729A2F912A7A2A69006A71FA /* TranslateAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

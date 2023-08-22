@@ -50,19 +50,24 @@ struct HomePageView: View {
                 .cornerRadius(20)
                 
             }
-            VStack {
-                // Hitories
-                
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                // TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+            
+            
+            ScrollView {
+                VStack {
+                                // Hitories
+                                
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                                TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
+                            }
             }
+            
             Spacer()
             
             
