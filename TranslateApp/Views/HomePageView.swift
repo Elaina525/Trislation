@@ -126,32 +126,4 @@ struct HomePageView_Previews: PreviewProvider {
 }
 
 
-struct TranslateTextRow: View {
-    let TopText: String
-    let BottomText: String
-    
-    var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .stroke(style: StrokeStyle(lineWidth: 2))
-            .frame(width: 300, height: 100)
-            .foregroundColor(.black)
-            .overlay(
-                VStack(spacing: 10) {
-                    Text(TopText)
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Divider()
-                        .background(Color.gray)
-                        .frame(height: 1)
-                    
-                    Text(BottomText)
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                    .padding()
-            )
-    }
-}
+
