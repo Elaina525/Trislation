@@ -23,36 +23,39 @@ struct TranslateTextRow: View {
     let TopText: String
     let BottomText: String
     @State var isFavourite = false
-    
+
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
             .stroke(style: StrokeStyle(lineWidth: 2))
-            .frame(width: 300, height: 100)
+            .frame(width: 350, height: 100)
             .foregroundColor(.black)
             .overlay {
                 VStack(spacing: 10) {
-                    Text(TopText)
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                    HStack {
+                        Text(TopText)
+                            .font(.system(size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        Spacer()
+
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .foregroundColor(.red)
+                            .onTapGesture {
+                                isFavourite.toggle()
+                            }
+                    }
+
                     Divider()
                         .background(Color.gray)
                         .frame(height: 1)
-                    
+
                     Text(BottomText)
                         .font(.system(size: 16))
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding()
-                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                    .foregroundColor(.red)
-                    .padding(.bottom, 60)
-                    .padding(.leading, 265)
-                    .onTapGesture {
-                        isFavourite.toggle()
-                    }
                 
             }
     }

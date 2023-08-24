@@ -10,15 +10,10 @@ import SwiftUI
 struct HistoryPageView: View {
     var body: some View {
         VStack {
-            
-            
-            
-            
-            
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     // Hitories
-                    
+
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
@@ -30,7 +25,7 @@ struct HistoryPageView: View {
             }
         }
     }
-    
+
     struct HistoryPageView_Previews: PreviewProvider {
         static var previews: some View {
             HistoryPageView()
