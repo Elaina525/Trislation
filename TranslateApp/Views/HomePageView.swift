@@ -13,43 +13,7 @@ struct HomePageView: View {
         VStack {
             
             
-            HStack {
-                // Top Buttons
-                Button("Translate") {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                }
-                .frame(width: 100,height: 35)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(8)
-                
-                Button("History") {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                }
-                .frame(width: 100,height: 35)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(8)
-                
-                Button("Favourites") {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                }
-                .frame(width: 100,height: 35)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(8)
-                
-                Button {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                } label: {
-                    Image(systemName: "person.fill")
-                }
-                .frame(width: 40, height: 40)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(20)
-                
-            }
+            
             
             
             ScrollView {
