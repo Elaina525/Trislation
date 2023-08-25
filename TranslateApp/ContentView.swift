@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab: Int = 0
-
+    @State private var settingPageIsPresented = false
+    
     var body: some View {
         VStack(){
-
+            
             HStack {
                 // Top Buttons
                 Button("Translate") {
@@ -46,35 +47,38 @@ struct ContentView: View {
                 .cornerRadius(8)
                 
                 Button {
-                    selectedTab = 3
+                    settingPageIsPresented.toggle()
                 } label: {
                     Image(systemName: "person.fill")
                 }
                 .frame(width: 40, height: 40)
                 .foregroundColor(.white)
-                .background(selectedTab == 3 ? Color.blue : Color.gray)
+                .background(Color.blue)
                 .cornerRadius(20)
+                .sheet(isPresented: $settingPageIsPresented) {
+                    SettingPageView()
+                }
                 
             }
             .padding()
             TabView(selection: $selectedTab) {
                 HomePageView()
                     .tag(0)
-
+                
                 HistoryPageView()
                     .tag(1)
-
+                
                 FavouritesPageView()
                     .tag(2)
             }
             .tabViewStyle((PageTabViewStyle(indexDisplayMode: .never)))
         }
-        }
     }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-        }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
+}
 
