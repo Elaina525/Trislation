@@ -21,7 +21,7 @@ struct SettingPageView: View {
             Form {
                 Section(header: Text("Login")) {
                     TextField("Username", text: $username)
-                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
                     Button(action: {
                         print("Login tapped!")
                     }) {

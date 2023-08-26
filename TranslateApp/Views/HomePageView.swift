@@ -10,14 +10,16 @@ import SwiftUI
 struct HomePageView: View {
     @State private var leftLanguage = 0
     @State private var rightLanguage = 1
-    private var languages = ["English", "Spanish", "French", "German"]
-
+    private var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
+    
+    @State var showSheet = false
+    
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     // Hitories
-
+                    
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
@@ -29,18 +31,33 @@ struct HomePageView: View {
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                 }
             }
-
-            Spacer()
-
+            
+            
+            
+            
+            
             VStack {
-                // Texting & talking Buttons
+                 
+                
 
                 TextField("Type here", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/ .constant("")/*@END_MENU_TOKEN@*/)
+                    .padding()
                     .frame(height: 40)
-                    .background(Color(UIColor.lightGray))
+                    .background(Color(UIColor.systemGray2))
                     .foregroundColor(.white)
                     .cornerRadius(8)
-
+                    
+                    // when click the input box, show the sheet
+//                    .onTapGesture {
+//                        showSheet.toggle()
+//                    }
+//                    .sheet(isPresented: $showSheet) {
+//                        Text("Hello World")
+//                    }
+                    
+                    
+                    
+                
                 Button {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                 } label: {
@@ -52,7 +69,7 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(50)
-
+                
                 HStack {
                     // Language Switching
                     Picker(selection: $leftLanguage, label: Text("Picker")) {
@@ -63,7 +80,8 @@ struct HomePageView: View {
                     .frame(width: 120, height: 35)
                     .background(Color(UIColor.lightGray))
                     .cornerRadius(8)
-
+                    
+                    
                     Button(action: {
                         withAnimation {
                             swap(&leftLanguage, &rightLanguage)
@@ -71,7 +89,7 @@ struct HomePageView: View {
                     }) {
                         Image(systemName: "arrow.left.arrow.right")
                     }
-
+                    
                     Picker(selection: $rightLanguage, label: Text("Picker")) {
                         ForEach(getRightLanguageOptions(), id: \.self) { language in
                             Text(language).tag(languages.firstIndex(of: language)!)
@@ -80,6 +98,8 @@ struct HomePageView: View {
                     .frame(width: 120, height: 35)
                     .background(Color(UIColor.lightGray))
                     .cornerRadius(8)
+                    
+                    
                 }
                 .onChange(of: leftLanguage) { _ in
                     if leftLanguage == rightLanguage {
@@ -91,15 +111,40 @@ struct HomePageView: View {
                         leftLanguage = getLeftLanguageOptions().firstIndex(of: languages[rightLanguage])!
                     }
                 }
+                .padding()
+                
+                
+                
             }
+            // add rounded corner on top
+            .padding()
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(20)
+            
+           
+            
+            
+            
+            
+                
         }
-        .padding()
-    }
 
+        .edgesIgnoringSafeArea(.bottom)
+    
+            
+        
+        
+        
+        
+        
+        
+        
+    }
+    
     private func getLeftLanguageOptions() -> [String] {
         return languages.filter { $0 != languages[rightLanguage] }
     }
-
+    
     private func getRightLanguageOptions() -> [String] {
         return languages.filter { $0 != languages[leftLanguage] }
     }

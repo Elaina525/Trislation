@@ -19,7 +19,9 @@ struct FavouritesPageView: View {
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
                 }
+                
             }
+            Spacer()
         }
     }
 

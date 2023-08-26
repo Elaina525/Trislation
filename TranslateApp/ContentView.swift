@@ -65,6 +65,8 @@ struct ContentView: View {
                 HomePageView()
                     .tag(0)
                 
+                    
+                
                 HistoryPageView()
                     .tag(1)
                 
@@ -72,7 +74,13 @@ struct ContentView: View {
                     .tag(2)
             }
             .tabViewStyle((PageTabViewStyle(indexDisplayMode: .never)))
+            
         }
+        
+        .edgesIgnoringSafeArea(.bottom)
+
+        
+            
     }
 }
 

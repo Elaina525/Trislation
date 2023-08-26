@@ -21,8 +21,10 @@ struct HistoryPageView: View {
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
+                    TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: false)
                 }
             }
+            Spacer()
         }
     }
 
