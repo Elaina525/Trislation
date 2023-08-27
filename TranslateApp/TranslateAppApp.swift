@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct TranslateAppApp: App {
+    @State var selectedTab: Int = 0
     var body: some Scene {
         WindowGroup {
             ContentView()

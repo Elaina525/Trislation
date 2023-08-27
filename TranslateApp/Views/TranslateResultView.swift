@@ -14,7 +14,7 @@ struct TranslateResultView: View {
     
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
-
+    
     var body: some View {
         VStack{
             // a rectangle with rounded corners 10 display the original text
@@ -98,8 +98,8 @@ struct TranslateResultView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
                     )
-            .padding()
-            .tag(0)
+                    .padding()
+                    .tag(0)
                 // Google
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray, lineWidth: 1)
@@ -111,8 +111,8 @@ struct TranslateResultView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
                     )
-            .padding()
-                .tag(1)
+                    .padding()
+                    .tag(1)
                 // Bing
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray, lineWidth: 1)
@@ -124,8 +124,8 @@ struct TranslateResultView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
                     )
-            .padding()
-                .tag(2)
+                    .padding()
+                    .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
