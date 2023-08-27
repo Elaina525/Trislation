@@ -11,17 +11,17 @@ struct HomePageView: View {
     @State private var leftLanguage = 0
     @State private var rightLanguage = 1
     private var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
-    
+
     @State var showSheet = false
     @State var isTranslating = false
-    
+
     var body: some View {
         if isTranslating == false {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack {
+                    CustomVerticalLayout {
                         // Hitories
-                        
+
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
@@ -33,13 +33,8 @@ struct HomePageView: View {
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                     }
                 }
-                
-                
-                
-                
-                
+
                 VStack {
-                    
                     Button {
                         isTranslating.toggle()
                     } label: {
@@ -50,12 +45,7 @@ struct HomePageView: View {
                     .background(Color(UIColor.systemGray4))
                     .foregroundColor(.white)
                     .cornerRadius(8)
-                    
-                    
-                    
-                    
-                    
-                    
+
                     Button {
                         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                     } label: {
@@ -67,7 +57,7 @@ struct HomePageView: View {
                     .foregroundColor(.white)
                     .background(.blue)
                     .cornerRadius(50)
-                    
+
                     HStack {
                         // Language Switching
                         Picker(selection: $leftLanguage, label: Text("Picker")) {
@@ -78,8 +68,7 @@ struct HomePageView: View {
                         .frame(width: 120, height: 35)
                         .background(Color(UIColor.systemGray4))
                         .cornerRadius(8)
-                        
-                        
+
                         Button(action: {
                             withAnimation {
                                 swap(&leftLanguage, &rightLanguage)
@@ -87,7 +76,7 @@ struct HomePageView: View {
                         }) {
                             Image(systemName: "arrow.left.arrow.right")
                         }
-                        
+
                         Picker(selection: $rightLanguage, label: Text("Picker")) {
                             ForEach(getRightLanguageOptions(), id: \.self) { language in
                                 Text(language).tag(languages.firstIndex(of: language)!)
@@ -96,8 +85,6 @@ struct HomePageView: View {
                         .frame(width: 120, height: 35)
                         .background(Color(UIColor.systemGray4))
                         .cornerRadius(8)
-                        
-                        
                     }
                     .onChange(of: leftLanguage) { _ in
                         if leftLanguage == rightLanguage {
@@ -110,29 +97,18 @@ struct HomePageView: View {
                         }
                     }
                     .padding()
-                    
-                    
-                    
                 }
                 // add rounded corner on top
                 .padding()
                 .background(Color(UIColor.systemGray6))
                 .cornerRadius(20)
-                
-                
-                
-                
-                
-                
-                
             }
             .edgesIgnoringSafeArea(.bottom)
-            
-            
+
         } else {
             VStack {
                 Image(systemName: "chevron.left")
-                    .offset(x: -170, y:0)
+                    .offset(x: -170, y: 0)
                     .font(.system(size: 20))
                     .foregroundColor(.blue)
                     .onTapGesture {
@@ -140,28 +116,13 @@ struct HomePageView: View {
                     }
                 TranslateResultView(originalText: "Hello World", translatedText: ["你好世界", "Hola Mundo", "Bonjour le monde"])
             }
-            
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
-    
+
     private func getLeftLanguageOptions() -> [String] {
         return languages.filter { $0 != languages[rightLanguage] }
     }
-    
+
     private func getRightLanguageOptions() -> [String] {
         return languages.filter { $0 != languages[leftLanguage] }
     }

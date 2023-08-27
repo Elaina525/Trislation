@@ -9,13 +9,13 @@ import SwiftUI
 
 struct SettingPageView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+
     @State var username: String = ""
     @State var password: String = ""
-    
+
     @State private var previewIndex = 0
     var defaultLanguage: [String] = ["English", "Spanish", "French", "German"]
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -28,7 +28,7 @@ struct SettingPageView: View {
                         Text("Login")
                     }
                 }
-                
+
                 Section(header: Text("Translate")) {
                     Picker(selection: $previewIndex, label: Text("Default Language")) {
                         ForEach(0 ..< defaultLanguage.count) {
@@ -36,7 +36,7 @@ struct SettingPageView: View {
                         }
                     }
                 }
-                
+
                 Section(header: Text("ABOUT")) {
                     HStack {
                         Text("Version")
@@ -44,7 +44,7 @@ struct SettingPageView: View {
                         Text("2.2.1")
                     }
                 }
-                
+
                 Section {
                     Button(action: {
                         print("Perform an action here...")

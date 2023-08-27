@@ -9,21 +9,22 @@ import SwiftUI
 
 struct TranslateResultView: View {
     let originalText: String
-    //translatedText is an arry of 3 strings
+    // translatedText is an arry of 3 strings
     let translatedText: [String]
-    
+
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
-    
+
+    var translateSources = ["Deepl", "Google", "Bing"]
+
     var body: some View {
-        VStack{
+        VStack {
             // a rectangle with rounded corners 10 display the original text
             // maximum long text is 2 lines
             // fixed height
-            
-            
+
             TextField("Enter text", text: .constant(originalText))
-            
+
                 .font(.system(size: 16))
                 .foregroundColor(.black)
                 .padding()
@@ -33,59 +34,34 @@ struct TranslateResultView: View {
                         .stroke(Color.gray, lineWidth: 1)
                 )
                 .padding()
-            
+
             // three buttons mean 3 different translate sources
-            //Deepl, Google, Bing
+            // Deepl, Google, Bing
             // hstack leading
             HStack {
-                Button(action: {
-                    selectedTab = 0
-                }) {
-                    Text("Deepl")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(selectedTab == 0 ? Color.blue : Color.gray)
-                        .cornerRadius(10)
-                    
-                    
+                ForEach(translateSources, id: \.self) { item in
+                    Button(action: {
+                        selectedTab = translateSources.firstIndex(of: item)!
+                    }) {
+                        Text(item)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
+                            .cornerRadius(10)
+                    }
                 }
-                
-                
-                Button(action: {
-                    selectedTab = 1
-                }) {
-                    Text("Google")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(selectedTab == 1 ? Color.blue : Color.gray)
-                        .cornerRadius(10)
-                    
-                    
-                }
-                
-                Button(action: {
-                    selectedTab = 2
-                }) {
-                    Text("Bing")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(selectedTab == 2 ? Color.blue : Color.gray)
-                        .cornerRadius(10)
-                    
-                    
-                }
+
                 Spacer()
-                
+
                 Image(systemName: isFavourite ? "heart.fill" : "heart")
                     .font(.system(size: 25))
                     .foregroundColor(.red)
                     .onTapGesture {
                         isFavourite.toggle()
                     }
-                
             }
             .padding(.horizontal)
-            
+
             TabView(selection: $selectedTab) {
                 // Deepl
                 RoundedRectangle(cornerRadius: 10)
@@ -128,13 +104,7 @@ struct TranslateResultView: View {
                     .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            
-            
-            
         }
-        
-        
-        
     }
 }
 

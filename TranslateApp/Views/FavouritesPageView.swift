@@ -11,7 +11,7 @@ struct FavouritesPageView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack {
+                CustomVerticalLayout {
                     // Hitories
 
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
@@ -19,7 +19,6 @@ struct FavouritesPageView: View {
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
                     TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
                 }
-                
             }
             Spacer()
         }
