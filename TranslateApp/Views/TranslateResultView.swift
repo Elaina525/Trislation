@@ -14,12 +14,13 @@ struct TranslateResultView: View {
     
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
-    
+
     var body: some View {
         VStack{
             // a rectangle with rounded corners 10 display the original text
             // maximum long text is 2 lines
             // fixed height
+            
             
             TextField("Enter text", text: .constant(originalText))
             
@@ -36,8 +37,8 @@ struct TranslateResultView: View {
             
             // three buttons mean 3 different translate sources
             //Deepl, Google, Bing
-            // hstack 靠左对齐
-            HStack() {
+            // hstack leading
+            HStack {
                 Button(action: {
                     selectedTab = 0
                 }) {
