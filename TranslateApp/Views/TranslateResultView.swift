@@ -77,6 +77,7 @@ struct TranslateResultView: View {
                 Spacer()
                 
                 Image(systemName: isFavourite ? "heart.fill" : "heart")
+                    .font(.system(size: 25))
                     .foregroundColor(.red)
                     .onTapGesture {
                         isFavourite.toggle()
