@@ -27,8 +27,7 @@ struct TranslateResultView: View {
                 .font(.system(size: 16))
                 .foregroundColor(.black)
                 .padding()
-                .background(Color.white)
-                .cornerRadius(10)
+                .background(Color(UIColor.systemGray5))
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.gray, lineWidth: 1)
@@ -89,34 +88,43 @@ struct TranslateResultView: View {
             
             TabView(selection: $selectedTab) {
                 // Deepl
-                VStack{
-                    Text(translatedText[0])
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    Spacer()
-                }
-                .tag(0)
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+                    .background(Color(UIColor.systemGray5))
+                    .overlay(
+                        Text(translatedText[0])
+                            .font(.system(size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding()
+                    )
+            .padding()
+            .tag(0)
                 // Google
-                VStack{
-                    Text(translatedText[1])
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    Spacer()
-                }
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+                    .background(Color(UIColor.systemGray5))
+                    .overlay(
+                        Text(translatedText[1])
+                            .font(.system(size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding()
+                    )
+            .padding()
                 .tag(1)
                 // Bing
-                VStack{
-                    Text(translatedText[2])
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    Spacer()
-                }
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+                    .background(Color(UIColor.systemGray5))
+                    .overlay(
+                        Text(translatedText[2])
+                            .font(.system(size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding()
+                    )
+            .padding()
                 .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
