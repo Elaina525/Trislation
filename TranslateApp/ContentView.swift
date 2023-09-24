@@ -38,8 +38,7 @@ struct ContentView: View {
                     SettingPageView()
                 }
             }
-            .padding()
-
+            
             TabView(selection: $selectedTab) {
                 HomePageView()
                     .tag(0)

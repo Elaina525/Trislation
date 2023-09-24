@@ -18,7 +18,9 @@ struct HomePageView: View {
     var body: some View {
         if isTranslating == false {
             VStack {
+                
                 ScrollView(.vertical, showsIndicators: false) {
+                    Spacer()
                     CustomVerticalLayout {
                         // Hitories
 
@@ -32,6 +34,7 @@ struct HomePageView: View {
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                         TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
                     }
+        
                 }
 
                 VStack {

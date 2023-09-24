@@ -30,6 +30,7 @@ struct TranslateTextRow: View {
     @State var isFavourite = false
 
     var body: some View {
+        Spacer()
         RoundedRectangle(cornerRadius: 20)
             .stroke(style: StrokeStyle(lineWidth: 2))
             .frame(width: 350, height: 100)
@@ -62,6 +63,7 @@ struct TranslateTextRow: View {
                 }
                 .padding()
             }
+            .padding(.horizontal, 40)
     }
 }
 
