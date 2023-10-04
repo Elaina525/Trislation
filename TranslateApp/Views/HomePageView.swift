@@ -14,43 +14,28 @@ struct HomePageView: View {
 
     @State var showSheet = false
     @State var isTranslating = false
-
+    
+    @State var originalText: String = ""
+    @State var translatedText1: String = ""
+    
     var body: some View {
         if isTranslating == false {
             VStack {
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    Spacer()
-                    CustomVerticalLayout {
-                        // Hitories
-
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                        TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2")
-                    }
-        
-                }
 
                 VStack {
-                    Button {
-                        isTranslating.toggle()
-                    } label: {
-                        Text("Type here")
-                    }
+                    TextField("Type here", text: $originalText)
                     .padding()
-                    .frame(width: 350, height: 40)
-                    .background(Color(UIColor.systemGray4))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .cornerRadius(8)
-
+                    .onSubmit {
+                        
+                        isTranslating.toggle()
+                        
+                        
+                    }
+                    Spacer()
                     Button {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                            
                     } label: {
                         Image(systemName: "mic.fill")
                             .resizable()
@@ -117,7 +102,8 @@ struct HomePageView: View {
                     .onTapGesture {
                         isTranslating.toggle()
                     }
-                TranslateResultView(originalText: "Hello World", translatedText: ["你好世界", "Hola Mundo", "Bonjour le monde"])
+                TranslateResultView(originalText: originalText, translatedText: ["", "", ""])
+
             }
         }
     }
@@ -128,6 +114,10 @@ struct HomePageView: View {
 
     private func getRightLanguageOptions() -> [String] {
         return languages.filter { $0 != languages[leftLanguage] }
+    }
+    
+    private func TranslateAction() {
+        
     }
 }
 

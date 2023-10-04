@@ -10,7 +10,7 @@ import SwiftUI
 struct TranslateResultView: View {
     let originalText: String
     // translatedText is an arry of 3 strings
-    let translatedText: [String]
+    @State var translatedText: [String]
 
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
