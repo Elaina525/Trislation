@@ -10,24 +10,52 @@ import SwiftUI
 struct TranslateResultView: View {
     @State var originalText: String
     // translatedText is an arry of 3 strings
-    @State var translatedText: [String] = ["12", "", ""]
+    // @State var translatedText: [String] = ["12", "", ""]
+    @State var translatedText1: String = ""
+    @State var translatedText2: String = ""
+    @State var translatedText3: String = ""
 
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
 
     var translateSources = ["Deepl", "Google", "Bing"]
 
-    func fetchTranslations() {
-        print (originalText)
-        baiduTranslate(text: originalText) { baiduTranslatedText, error in
-            DispatchQueue.main.async {
-                if let baiduTranslatedText = baiduTranslatedText {
-                    translatedText[0] = baiduTranslatedText
-                }
+    func fetchTranslation(using translationFunction: @escaping (String, @escaping (String?, Error?) -> Void) -> Void, completion: @escaping (String?, Error?) -> Void) {
+        translationFunction(originalText) { translatedText, error in
+            if let error = error {
+                completion(nil, error)
+                return
             }
+            guard let translatedText = translatedText else {
+                completion(nil, NSError(domain: "TranslationError", code: -1, userInfo: nil))
+                return
+            }
+            completion(translatedText, nil)
         }
     }
 
+    func fetchTranslations() {
+        fetchTranslation(using: baiduTranslate) { baiduTranslatedText, _ in
+            if let baiduTranslatedText = baiduTranslatedText {
+                translatedText1 = baiduTranslatedText
+                print("Baidu: \(baiduTranslatedText)")
+            }
+        }
+
+        fetchTranslation(using: deeplTranslate) { deeplTranslatedText, _ in
+            if let deeplTranslatedText = deeplTranslatedText {
+                translatedText2 = deeplTranslatedText
+                print("DeepL: \(deeplTranslatedText)")
+            }
+        }
+
+        fetchTranslation(using: azureTranslate) { azureTranslatedText, _ in
+            if let azureTranslatedText = azureTranslatedText {
+                translatedText3 = azureTranslatedText
+                print("Azure: \(azureTranslatedText)")
+            }
+        }
+    }
 
     var body: some View {
         VStack {
@@ -80,7 +108,7 @@ struct TranslateResultView: View {
                     .stroke(Color.gray, lineWidth: 1)
                     .background(Color(UIColor.systemGray5))
                     .overlay(
-                        Text(translatedText[0])
+                        Text(translatedText1)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -93,7 +121,7 @@ struct TranslateResultView: View {
                     .stroke(Color.gray, lineWidth: 1)
                     .background(Color(UIColor.systemGray5))
                     .overlay(
-                        Text(translatedText[1])
+                        Text(translatedText2)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -106,7 +134,7 @@ struct TranslateResultView: View {
                     .stroke(Color.gray, lineWidth: 1)
                     .background(Color(UIColor.systemGray5))
                     .overlay(
-                        Text(translatedText[2])
+                        Text(translatedText3)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -123,6 +151,6 @@ struct TranslateResultView: View {
 
 struct TranslateResultView_Previews: PreviewProvider {
     static var previews: some View {
-        TranslateResultView(originalText: "Hello World", translatedText: ["你好世界", "Hola Mundo", "Bonjour le monde"])
+        TranslateResultView(originalText: "Today is yours")
     }
 }

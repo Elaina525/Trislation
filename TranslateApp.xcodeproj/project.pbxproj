@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		47210E2E2A9A8AE00023E70C /* TranslateResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47210E2D2A9A8AE00023E70C /* TranslateResultView.swift */; };
 		4739BAE82A990E0C00A7164B /* SettingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4739BAE72A990E0C00A7164B /* SettingPageView.swift */; };
+		6A2323912AD062320099D612 /* DeeplTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2323902AD062320099D612 /* DeeplTranslate.swift */; };
+		6A2323952AD0649A0099D612 /* AzureTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2323942AD0649A0099D612 /* AzureTranslate.swift */; };
 		729A2F912A7A2A69006A71FA /* TranslateAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A2F902A7A2A69006A71FA /* TranslateAppApp.swift */; };
 		729A2F932A7A2A69006A71FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A2F922A7A2A69006A71FA /* ContentView.swift */; };
 		729A2F952A7A2A6A006A71FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 729A2F942A7A2A6A006A71FA /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 		47210E2D2A9A8AE00023E70C /* TranslateResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateResultView.swift; sourceTree = "<group>"; };
 		4739BAE72A990E0C00A7164B /* SettingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageView.swift; sourceTree = "<group>"; };
 		47656D2F2A9B488C00F18EB6 /* Directions.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Directions.geojson; sourceTree = "<group>"; };
+		6A2323902AD062320099D612 /* DeeplTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplTranslate.swift; sourceTree = "<group>"; };
+		6A2323942AD0649A0099D612 /* AzureTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTranslate.swift; sourceTree = "<group>"; };
 		729A2F8D2A7A2A69006A71FA /* TranslateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		729A2F902A7A2A69006A71FA /* TranslateAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateAppApp.swift; sourceTree = "<group>"; };
 		729A2F922A7A2A69006A71FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				47210E2D2A9A8AE00023E70C /* TranslateResultView.swift */,
 				72C492202ACD2F7100805239 /* ViewController.swift */,
 				72C492252ACD35A800805239 /* DataController.swift */,
+				6A2323902AD062320099D612 /* DeeplTranslate.swift */,
+				6A2323942AD0649A0099D612 /* AzureTranslate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,8 +204,10 @@
 				729A2F932A7A2A69006A71FA /* ContentView.swift in Sources */,
 				72C492212ACD2F7100805239 /* ViewController.swift in Sources */,
 				72CF3EE92A83645E007A4E23 /* HomePageView.swift in Sources */,
+				6A2323912AD062320099D612 /* DeeplTranslate.swift in Sources */,
 				72C492262ACD35A800805239 /* DataController.swift in Sources */,
 				72C492282ACD38EF00805239 /* BaiduTranslate.swift in Sources */,
+				6A2323952AD0649A0099D612 /* AzureTranslate.swift in Sources */,
 				47210E2E2A9A8AE00023E70C /* TranslateResultView.swift in Sources */,
 				72C5EFCD2A95AC0700444399 /* FavouritesPageView.swift in Sources */,
 				72C492242ACD339000805239 /* Translation.xcdatamodeld in Sources */,
