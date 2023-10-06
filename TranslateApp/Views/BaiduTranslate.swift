@@ -1,7 +1,7 @@
 import CryptoKit
 import SwiftUI
 
-    func translate(text: String, completion: @escaping (String?, Error?) -> Void) {
+    func baiduTranslate(text: String, completion: @escaping (String?, Error?) -> Void) {
         let appid = "20200426000430988"
         let secretKey = "s4MllyEWiYSeCyffV9Ab"
         let salt = String(arc4random_uniform(65536))
@@ -34,8 +34,8 @@ import SwiftUI
             do {
                 let decodedData = try JSONDecoder().decode(BaiduTranslation.self, from: data) // 确保你有一个适当的BaiduTranslation结构体
                 DispatchQueue.main.async {
-                    let translatedText = decodedData.trans_result.first?.dst ?? ""
-                    completion(translatedText, nil)
+                    let baiduTranslatedText = decodedData.trans_result.first?.dst ?? ""
+                    completion(baiduTranslatedText, nil)
                 }
             } catch {
                 completion(nil, error)

@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct TranslateResultView: View {
-    let originalText: String
+    @State var originalText: String
     // translatedText is an arry of 3 strings
-    @State var translatedText: [String]
+    @State var translatedText: [String] = ["12", "", ""]
 
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
 
     var translateSources = ["Deepl", "Google", "Bing"]
+
+    func fetchTranslations() {
+        print (originalText)
+        baiduTranslate(text: originalText) { baiduTranslatedText, error in
+            DispatchQueue.main.async {
+                if let baiduTranslatedText = baiduTranslatedText {
+                    translatedText[0] = baiduTranslatedText
+                }
+            }
+        }
+    }
+
 
     var body: some View {
         VStack {
@@ -105,6 +117,7 @@ struct TranslateResultView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
+        .onAppear(perform: fetchTranslations)
     }
 }
 
