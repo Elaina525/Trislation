@@ -7,12 +7,19 @@
 
 import Foundation
 
-    func azureTranslate(text: String, completion: @escaping (String?, Error?) -> Void) {
+    func azureTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
         let key = "48ccaa82136d4a59a6f58d9291149911"
         let region = "australiaeast"
         let endpoint = "https://api.cognitive.microsofttranslator.com"
+        let url: URL
+        
+        if (from == "auto"){
+            url = URL(string: "\(endpoint)/translate?api-version=3.0&to=\(to)")!
+        }
+        else{
+            url = URL(string: "\(endpoint)/translate?api-version=3.0&from=\(from)&to=\(to)")!
+        }
 
-        let url = URL(string: "\(endpoint)/translate?api-version=3.0&from=en&to=de")! // 这里将目标语言设为了德语（de）
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

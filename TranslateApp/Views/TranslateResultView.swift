@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TranslateResultView: View {
     @State var originalText: String
+    @State var from: String
+    @State var to: String
+
     // translatedText is an arry of 3 strings
     // @State var translatedText: [String] = ["12", "", ""]
     @State var translatedText1: String = ""
@@ -35,26 +38,44 @@ struct TranslateResultView: View {
     }
 
     func fetchTranslations() {
-        fetchTranslation(using: baiduTranslate) { baiduTranslatedText, _ in
+
+
+        fetchTranslation(using: { text, completion in
+            baiduTranslate(text: text, from: from, to: to) { translatedText, error in
+                completion(translatedText, error)
+            }
+        }) { baiduTranslatedText, _ in
             if let baiduTranslatedText = baiduTranslatedText {
                 translatedText1 = baiduTranslatedText
                 print("Baidu: \(baiduTranslatedText)")
             }
         }
+        
 
-        fetchTranslation(using: deeplTranslate) { deeplTranslatedText, _ in
+        fetchTranslation(using: { text, completion in
+            deeplTranslate(text: text, from: from, to: to) { translatedText, error in
+                completion(translatedText, error)
+            }
+        }) { deeplTranslatedText, _ in
             if let deeplTranslatedText = deeplTranslatedText {
                 translatedText2 = deeplTranslatedText
                 print("DeepL: \(deeplTranslatedText)")
             }
         }
 
-        fetchTranslation(using: azureTranslate) { azureTranslatedText, _ in
+        fetchTranslation(using: { text, completion in
+            azureTranslate(text: text, from: from, to: to) { translatedText, error in
+                completion(translatedText, error)
+            }
+        }) { azureTranslatedText, _ in
             if let azureTranslatedText = azureTranslatedText {
                 translatedText3 = azureTranslatedText
                 print("Azure: \(azureTranslatedText)")
             }
         }
+
+
+
     }
 
     var body: some View {
@@ -151,6 +172,6 @@ struct TranslateResultView: View {
 
 struct TranslateResultView_Previews: PreviewProvider {
     static var previews: some View {
-        TranslateResultView(originalText: "Today is yours")
+        TranslateResultView(originalText: "Today is yours", from: "auto", to: "zh")
     }
 }

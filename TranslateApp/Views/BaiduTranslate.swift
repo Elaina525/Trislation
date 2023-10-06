@@ -1,7 +1,7 @@
 import CryptoKit
 import SwiftUI
 
-    func baiduTranslate(text: String, completion: @escaping (String?, Error?) -> Void) {
+    func baiduTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
         let appid = "20200426000430988"
         let secretKey = "s4MllyEWiYSeCyffV9Ab"
         let salt = String(arc4random_uniform(65536))
@@ -16,8 +16,8 @@ import SwiftUI
         let requestBody: [String: Any] = [
             "appid": appid,
             "q": text,
-            "from": "auto",
-            "to": "zh",
+            "from": from,
+            "to": to,
             "salt": salt,
             "sign": md5Sign,
         ]
