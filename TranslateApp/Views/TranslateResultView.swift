@@ -47,7 +47,7 @@ struct TranslateResultView: View {
         }) { baiduTranslatedText, _ in
             if let baiduTranslatedText = baiduTranslatedText {
                 translatedText1 = baiduTranslatedText
-                print("Baidu: \(baiduTranslatedText)")
+                print("Baidu: \(translatedText1)")
             }
         }
         
@@ -59,7 +59,7 @@ struct TranslateResultView: View {
         }) { deeplTranslatedText, _ in
             if let deeplTranslatedText = deeplTranslatedText {
                 translatedText2 = deeplTranslatedText
-                print("DeepL: \(deeplTranslatedText)")
+                print("DeepL: \(translatedText2)")
             }
         }
 
@@ -70,7 +70,7 @@ struct TranslateResultView: View {
         }) { azureTranslatedText, _ in
             if let azureTranslatedText = azureTranslatedText {
                 translatedText3 = azureTranslatedText
-                print("Azure: \(azureTranslatedText)")
+                print("Azure: \(translatedText3)")
             }
         }
 
@@ -83,7 +83,7 @@ struct TranslateResultView: View {
             // a rectangle with rounded corners 10 display the original text
             // maximum long text is 2 lines
             // fixed height
-
+            Text(translatedText1).hidden()
             TextField("Enter text", text: .constant(originalText))
 
                 .font(.system(size: 16))
