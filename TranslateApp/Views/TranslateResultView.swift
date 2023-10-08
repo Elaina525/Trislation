@@ -83,6 +83,7 @@ struct TranslateResultView: View {
             // a rectangle with rounded corners 10 display the original text
             // maximum long text is 2 lines
             // fixed height
+            
             Text(translatedText1)
                 .font(.system(size: 1))
                 .hidden()

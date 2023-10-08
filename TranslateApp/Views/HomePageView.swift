@@ -92,15 +92,23 @@ struct HomePageView: View {
                 // for "Auto" -> "auto"
                 let from = leftLanguage == "Auto" ? "auto" : shortLanguages[languages.firstIndex(of: leftLanguage)!]
                 let to = shortLanguages[languages.firstIndex(of: rightLanguage)!]
-                TranslateResultView(originalText: text, from: from, to: to)
-
-                    .navigationBarItems(leading: Button(action: {
-                        currentPage = .home
-                    }) {
+                VStack {
+                    HStack {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20))
                             .foregroundColor(.blue)
-                    })
+                            .onTapGesture {
+                                currentPage = .home
+                            }
+                            .padding(.leading, 16) // Adjust leading padding to move the image to the left
+                    
+                        Spacer() // Add spacer to push the image to the left
+                    }
+                    
+                    TranslateResultView(originalText: text, from: from, to: to)
+                     
+                }
+                
             }
         }
     }
