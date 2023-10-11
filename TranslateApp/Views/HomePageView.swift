@@ -220,6 +220,6 @@ struct HomePageView: View {
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePageView(from: "auto", to: "zn")
+        HomePageView(from: "auto", to: "zh")
     }
 }
