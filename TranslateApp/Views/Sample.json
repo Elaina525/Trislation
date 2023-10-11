@@ -1,0 +1,110 @@
+[
+    {
+        "favourite": false,
+        "original_text": "Good morning",
+        "source1": "Google",
+        "source2": "Azure",
+        "source3": "DeepL",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "早上好",
+        "translated_text2": "早安",
+        "translated_text3": "早晨好"
+    },
+    {
+        "favourite": true,
+        "original_text": "Thank you",
+        "source1": "Azure",
+        "source2": "DeepL",
+        "source3": "Baidu",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "谢谢",
+        "translated_text2": "感谢您",
+        "translated_text3": "多谢"
+    },
+    {
+        "favourite": false,
+        "original_text": "Good evening",
+        "source1": "Google",
+        "source2": "Azure",
+        "source3": "DeepL",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "晚上好",
+        "translated_text2": "晚安",
+        "translated_text3": "傍晚好"
+    },
+    {
+        "favourite": true,
+        "original_text": "How are you?",
+        "source1": "DeepL",
+        "source2": "Baidu",
+        "source3": "Google",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "你好吗？",
+        "translated_text2": "您好吗？",
+        "translated_text3": "你好吗？"
+    },
+    {
+        "favourite": false,
+        "original_text": "I love programming",
+        "source1": "Azure",
+        "source2": "Baidu",
+        "source3": "DeepL",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "我热爱编程",
+        "translated_text2": "我喜欢编程",
+        "translated_text3": "我热爱编程"
+    },
+    {
+        "favourite": true,
+        "original_text": "Please help me",
+        "source1": "DeepL",
+        "source2": "Azure",
+        "source3": "Baidu",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "请帮助我",
+        "translated_text2": "请帮我",
+        "translated_text3": "请帮我"
+    },
+    {
+        "favourite": false,
+        "original_text": "Have a nice day",
+        "source1": "Azure",
+        "source2": "Google",
+        "source3": "DeepL",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "祝你有个美好的一天",
+        "translated_text2": "祝你度过愉快的一天",
+        "translated_text3": "祝你有个美好的一天"
+    },
+    {
+        "favourite": true,
+        "original_text": "I'm hungry",
+        "source1": "Baidu",
+        "source2": "DeepL",
+        "source3": "Azure",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "我饿了",
+        "translated_text2": "我肚子饿了",
+        "translated_text3": "我饿了"
+    },
+    {
+        "favourite": false,
+        "original_text": "See you later",
+        "source1": "DeepL",
+        "source2": "Baidu",
+        "source3": "Azure",
+        "source_language": "English",
+        "target_language": "Chinese",
+        "translated_text1": "回头见",
+        "translated_text2": "再见",
+        "translated_text3": "下次见"
+    }
+]

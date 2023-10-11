@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
-        <attribute name="api_1" optional="YES" attributeType="String"/>
-        <attribute name="api_2" optional="YES" attributeType="String"/>
-        <attribute name="api_3" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="TranslatedText" representedClassName="TranslatedText" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="favourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="original_text" optional="YES" attributeType="String"/>
         <attribute name="source_language" optional="YES" attributeType="String"/>
+        <attribute name="source1" optional="YES" attributeType="String"/>
+        <attribute name="source2" optional="YES" attributeType="String"/>
+        <attribute name="source3" optional="YES" attributeType="String"/>
         <attribute name="target_language" optional="YES" attributeType="String"/>
-        <attribute name="translation_1" optional="YES" attributeType="String"/>
-        <attribute name="translation_2" optional="YES" attributeType="String"/>
-        <attribute name="translation_3" optional="YES" attributeType="String"/>
+        <attribute name="translated_text1" optional="YES" attributeType="String"/>
+        <attribute name="translated_text2" optional="YES" attributeType="String"/>
+        <attribute name="translated_text3" optional="YES" attributeType="String"/>
     </entity>
 </model>
