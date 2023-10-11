@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TranslateResultView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext // 获取 managedObjectContext
+
     @State var originalText: String
     @State var from: String
     @State var to: String
@@ -48,6 +51,7 @@ struct TranslateResultView: View {
             if let baiduTranslatedText = baiduTranslatedText {
                 translatedText1 = baiduTranslatedText
                 print("Baidu: \(translatedText1)")
+                saveToDatabase()
             }
         }
         
@@ -60,6 +64,7 @@ struct TranslateResultView: View {
             if let deeplTranslatedText = deeplTranslatedText {
                 translatedText2 = deeplTranslatedText
                 print("DeepL: \(translatedText2)")
+                saveToDatabase()
             }
         }
 
@@ -71,12 +76,45 @@ struct TranslateResultView: View {
             if let azureTranslatedText = azureTranslatedText {
                 translatedText3 = azureTranslatedText
                 print("Azure: \(translatedText3)")
+                saveToDatabase()
             }
         }
 
 
 
     }
+
+    func saveToDatabase() {
+    // 检查所有三个翻译是否都已完成
+    if !translatedText1.isEmpty, !translatedText2.isEmpty, !translatedText3.isEmpty {
+        // 获取数据库的上下文（这里假设您已经有一个名为 'context' 的 NSManagedObjectContext 实例）
+let context = self.managedObjectContext
+        // 创建一个新的 TranslatedText 对象
+        let translatedText = TranslatedText(context: context)
+
+        // 使用您提供的代码设置 TranslatedText 对象的属性
+        translatedText.setValue(isFavourite, forKey: "favourite")
+        translatedText.setValue(Date(), forKey: "date")
+        translatedText.setValue(UUID(), forKey: "id")
+        translatedText.setValue(originalText, forKey: "original_text")
+        translatedText.setValue("Deepl", forKey: "source1")
+        translatedText.setValue("Google", forKey: "source2")
+        translatedText.setValue("Bing", forKey: "source3")
+        translatedText.setValue(from, forKey: "source_language")
+        translatedText.setValue(to, forKey: "target_language")
+        translatedText.setValue(translatedText1, forKey: "translated_text1")
+        translatedText.setValue(translatedText2, forKey: "translated_text2")
+        translatedText.setValue(translatedText3, forKey: "translated_text3")
+
+        // 尝试保存上下文以将新对象写入数据库
+        do {
+            try context.save()
+        } catch {
+            // 处理保存错误
+            print("无法保存翻译文本: \(error)")
+        }
+    }
+}
 
     var body: some View {
         VStack {

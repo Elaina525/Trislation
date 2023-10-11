@@ -13,7 +13,7 @@ struct FavouritesPageView: View {
     // 使用 @FetchRequest 从 CoreData 获取 TranslatedText 实体
     @FetchRequest(
         entity: TranslatedText.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.original_text, ascending: true)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: true)]
     ) var translatedTexts: FetchedResults<TranslatedText>
 
 
