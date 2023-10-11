@@ -6,18 +6,27 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct FavouritesPageView: View {
+
+    // 使用 @FetchRequest 从 CoreData 获取 TranslatedText 实体
+    @FetchRequest(
+        entity: TranslatedText.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.original_text, ascending: true)]
+    ) var translatedTexts: FetchedResults<TranslatedText>
+
+
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 CustomVerticalLayout {
-                    // Hitories
+                    ForEach(translatedTexts, id: \.self) { translatedText in
+                        if translatedText.favourite {
+                            TranslateTextRow(data: translatedText)
+                        }
+                    }
 
-                    TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
-                    TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
-                    TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
-                    TranslateTextRow(TopText: "Top Example Text1", BottomText: "Bottom Example Text2", isFavourite: true)
                 }
             }
             Spacer()

@@ -19,9 +19,6 @@ struct CoreDataTest: View {
         List {
             ForEach(translatedTexts, id: \.self) { translatedText in
                 Text(translatedText.original_text ?? "未知") // 替换 someAttribute 为你实际的属性
-                // print all 
-                // print(translatedText.original_text ?? "未知")
-                // print(translatedText.source1 ?? "未知")
             }
         }
     }

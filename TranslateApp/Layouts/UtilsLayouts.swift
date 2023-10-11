@@ -5,6 +5,7 @@
 //  Created by Xiaolong Guo on 23/8/2023.
 //
 
+import CoreData
 import SwiftUI
 
 struct UtilsLayouts: View {
@@ -12,8 +13,7 @@ struct UtilsLayouts: View {
         // for test
 
         CustomVerticalLayout {
-            TranslateTextRow(TopText: "test", BottomText: "test", isFavourite: false)
-            TranslateTextRow(TopText: "test", BottomText: "test", isFavourite: false)
+            // TranslateTextRow(data: TranslatedText())
         }
     }
 }
@@ -25,9 +25,9 @@ struct UtilsLayouts_Previews: PreviewProvider {
 }
 
 struct TranslateTextRow: View {
-    let TopText: String
-    let BottomText: String
-    @State var isFavourite = false
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @ObservedObject var data: TranslatedText
+    
 
     var body: some View {
         Spacer()
@@ -38,17 +38,23 @@ struct TranslateTextRow: View {
             .overlay {
                 VStack(spacing: 10) {
                     HStack {
-                        Text(TopText)
+                        Text(data.original_text ?? "未知")
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         Spacer()
 
-                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                        Image(systemName: data.favourite ? "heart.fill" : "heart")
                             .foregroundColor(.red)
                             .onTapGesture {
-                                isFavourite.toggle()
+                                data.favourite.toggle()
+                                do {
+                                    try self.managedObjectContext.save() // 添加这一行
+                                } catch {
+                                    // 处理保存错误
+                                    print(error.localizedDescription)
+                                }
                             }
                     }
 
@@ -56,7 +62,7 @@ struct TranslateTextRow: View {
                         .background(Color.gray)
                         .frame(height: 1)
 
-                    Text(BottomText)
+                    Text(data.translated_text1 ?? "未知")
                         .font(.system(size: 16))
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)
