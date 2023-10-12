@@ -124,8 +124,7 @@ let context = self.managedObjectContext
 }
 
     var body: some View {
-        VStack {
-            
+        VStack {                
             TextField("Enter text", text: $originalText)
 
                 .font(.system(size: 16))
