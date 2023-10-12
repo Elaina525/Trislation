@@ -10,6 +10,7 @@ import CoreData
 
 struct TranslateResultView: View {
     @Environment(\.managedObjectContext) var managedObjectContext // 获取 managedObjectContext
+    @StateObject private var speechToText = SpeechToText()
 
     @State var originalText: String
     @State var from: String
@@ -23,8 +24,14 @@ struct TranslateResultView: View {
 
     @State private var selectedTab: Int = 0
     @State var isFavourite = false
-
-    var translateSources = ["Deepl", "Google", "Bing"]
+    
+    @State var leftLanguage: String = "Auto"
+    @State var rightLanguage: String = "Chinese"
+    var translateSources = ["Baidu", "DeepL", "Azure"]
+    var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
+    var shortLanguages = ["en", "es", "fr", "de", "zh", "ja", "ru", "ar"]
+    var leftLanguageOptions: [String] { ["Auto"] + languages.filter { $0 != rightLanguage } }
+    var rightLanguageOptions: [String] { languages.filter { $0 != leftLanguage } }
 
     func fetchTranslation(using translationFunction: @escaping (String, @escaping (String?, Error?) -> Void) -> Void, completion: @escaping (String?, Error?) -> Void) {
         translationFunction(originalText) { translatedText, error in
@@ -97,9 +104,9 @@ let context = self.managedObjectContext
         translatedText.setValue(Date(), forKey: "date")
         translatedText.setValue(UUID(), forKey: "id")
         translatedText.setValue(originalText, forKey: "original_text")
-        translatedText.setValue("Deepl", forKey: "source1")
-        translatedText.setValue("Google", forKey: "source2")
-        translatedText.setValue("Bing", forKey: "source3")
+        translatedText.setValue("Baidu", forKey: "source1")
+        translatedText.setValue("DeepL", forKey: "source2")
+        translatedText.setValue("Azure", forKey: "source3")
         translatedText.setValue(from, forKey: "source_language")
         translatedText.setValue(to, forKey: "target_language")
         translatedText.setValue(translatedText1, forKey: "translated_text1")
@@ -118,98 +125,149 @@ let context = self.managedObjectContext
 
     var body: some View {
         VStack {
-            // a rectangle with rounded corners 10 display the original text
-            // maximum long text is 2 lines
-            // fixed height
             
-            Text(translatedText1)
-                .font(.system(size: 1))
-                .hidden()
-            TextField("Enter text", text: .constant(originalText))
+            TextField("Enter text", text: $originalText)
 
                 .font(.system(size: 16))
                 .foregroundColor(.black)
                 .padding()
-                .background(Color(UIColor.systemGray5))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-                .padding()
+                .onSubmit {
+                    fetchTranslations()
+                }
 
             // three buttons mean 3 different translate sources
             // Deepl, Google, Bing
             // hstack leading
-            HStack {
+            Divider()
+            HStack(spacing: 34) {
                 ForEach(translateSources, id: \.self) { item in
                     Button(action: {
                         selectedTab = translateSources.firstIndex(of: item)!
                     }) {
                         Text(item)
-                            .foregroundColor(.white)
+                            .foregroundColor(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
                             .padding()
-                            .background(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
-                            .cornerRadius(10)
                     }
                 }
-
-                Spacer()
-
                 Image(systemName: isFavourite ? "heart.fill" : "heart")
-                    .font(.system(size: 25))
+                    .font(.system(size: 20))
                     .foregroundColor(.red)
                     .onTapGesture {
                         isFavourite.toggle()
                     }
             }
-            .padding(.horizontal)
-
             TabView(selection: $selectedTab) {
                 // Deepl
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-                    .background(Color(UIColor.systemGray5))
-                    .overlay(
+                
                         Text(translatedText1)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
-                    )
-                    .padding()
-                    .tag(0)
+                            .tag(0)
+                    
+                    
                 // Google
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-                    .background(Color(UIColor.systemGray5))
-                    .overlay(
+                
                         Text(translatedText2)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
-                    )
-                    .padding()
-                    .tag(1)
+                            .tag(1)
+                    
+                    
                 // Bing
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-                    .background(Color(UIColor.systemGray5))
-                    .overlay(
+                
                         Text(translatedText3)
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding()
-                    )
-                    .padding()
-                    .tag(2)
+                            .tag(2)
+                    
+                    
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+
+                Spacer()
+            VStack {
+                Button {
+                    speechToText.toggleRecording()
+                    originalText = speechToText.transcript
+                    if speechToText.isRecording == false {
+                        speechToText.transcript = ""
+                        fetchTranslations()
+                    }
+                    
+                } label: {
+                    Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
+                        .resizable()
+                        .frame(width: 35, height: 50)
+                }
+                .frame(width: 100, height: 100)
+                .foregroundColor(.white)
+                .background(.blue)
+                .cornerRadius(50)
+                
+                HStack {
+                    // Language Switching
+                    Picker("Left Language", selection: $leftLanguage) {
+                        ForEach(leftLanguageOptions, id: \.self) { language in
+                            Text(language)
+                        }
+                    }
+                    .frame(width: 120, height: 35)
+                    .background(Color(UIColor.systemGray4))
+                    .cornerRadius(8)
+                    
+                    Button(action: {
+                        withAnimation {
+                            swap(&leftLanguage, &rightLanguage)
+                        }
+                    }) {
+                        Image(systemName: "arrow.left.arrow.right")
+                    }
+                    
+                    Picker("Right Language", selection: $rightLanguage) {
+                        ForEach(rightLanguageOptions, id: \.self) { language in
+                            Text(language)
+                        }
+                    }
+                    .frame(width: 120, height: 35)
+                    .background(Color(UIColor.systemGray4))
+                    .cornerRadius(8)
+                }
+                .onChange(of: leftLanguage) { _ in
+                    if leftLanguage == rightLanguage {
+                        rightLanguage = rightLanguageOptions.first!
+                    }
+                }
+                .onChange(of: rightLanguage) { _ in
+                    if leftLanguage == rightLanguage {
+                        leftLanguage = leftLanguageOptions.first!
+                    }
+                }
+                .padding()
+                Text(translatedText1)
+                    .font(.system(size: 1))
+                    .hidden()
+            }
+            
+            }
+            .padding(.horizontal)
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(20)
+            .edgesIgnoringSafeArea(.bottom)
+            .onAppear(perform: fetchTranslations)
+
+            
+            
         }
-        .onAppear(perform: fetchTranslations)
+        
+        
     }
-}
+
 
 struct TranslateResultView_Previews: PreviewProvider {
     static var previews: some View {
