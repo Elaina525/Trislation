@@ -131,6 +131,9 @@ let context = self.managedObjectContext
                 .foregroundColor(.black)
                 .padding()
                 .onSubmit {
+                    translatedText1 = ""
+                    translatedText2 = ""
+                    translatedText3 = ""
                     fetchTranslations()
                 }
 
@@ -196,6 +199,9 @@ let context = self.managedObjectContext
                     originalText = speechToText.transcript
                     if speechToText.isRecording == false {
                         speechToText.transcript = ""
+                        translatedText1 = ""
+                        translatedText2 = ""
+                        translatedText3 = ""
                         fetchTranslations()
                     }
                     

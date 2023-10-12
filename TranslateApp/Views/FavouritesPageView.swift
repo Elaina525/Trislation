@@ -40,8 +40,6 @@ struct FavouritesPageView: View {
                                                 updateDetailData(translatedText)
                                                 print(originalText)
                                             }
-                                    
-                                    
                                 }
                             }
                         }
