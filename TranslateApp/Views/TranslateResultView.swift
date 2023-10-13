@@ -103,18 +103,9 @@ struct TranslateResultView: View {
                 translatedText1 = existingEntry.translated_text1 ?? ""
                 translatedText2 = existingEntry.translated_text2 ?? ""
                 translatedText3 = existingEntry.translated_text3 ?? ""
+                
+                isFavourite = existingEntry.favourite
 
-                // 检查favourite字段是否需要更新
-                if existingEntry.favourite != isFavourite {
-                    existingEntry.setValue(isFavourite, forKey: "favourite")
-                    // 尝试保存上下文以将更改写入数据库
-                    do {
-                        try managedObjectContext.save()
-                    } catch {
-                        // 处理保存错误
-                        print("无法更新favourite字段: \(error)")
-                    }
-                }
                 return true // 返回true表示找到了匹配的条目
             }
         } catch {
@@ -189,7 +180,7 @@ struct TranslateResultView: View {
             // Deepl, Google, Bing
             // hstack leading
             Divider()
-            HStack(spacing: 34) {
+            HStack(spacing: 30) {
                 ForEach(translateSources, id: \.self) { item in
                     Button(action: {
                         selectedTab = translateSources.firstIndex(of: item)!
