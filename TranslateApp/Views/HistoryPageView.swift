@@ -14,9 +14,8 @@ struct HistoryPageView: View {
     
     @State private var selectedObjectID: UUID?
     @State var originalText = ""
-    @State var translatedText1: String = ""
-    @State var translatedText2: String = ""
-    @State var translatedText3: String = ""
+    @State var from = ""
+    @State var to = ""
     var translateSources = ["Baidu", "DeepL", "Azure"]
     @State private var selectedTab: Int = 0
     
@@ -45,103 +44,117 @@ struct HistoryPageView: View {
                         Spacer()
                     }
         } else {
+//            VStack {
+//
+//                Image(systemName: "chevron.left")
+//                    .foregroundColor(.blue)
+//                    .offset(x: -160, y: 0)
+//                    .onTapGesture {
+//                        detailView.toggle()
+//                    }
+//                Text(originalText)
+//                    .font(.system(size: 16))
+//                    .foregroundColor(.black)
+//                    .padding()
+//
+//
+//                // three buttons mean 3 different translate sources
+//                // Deepl, Google, Bing
+//                // hstack leading
+//                Divider()
+//                HStack(spacing: 34) {
+//                    ForEach(translateSources, id: \.self) { item in
+//                        Button(action: {
+//                            selectedTab = translateSources.firstIndex(of: item)!
+//                        }) {
+//                            Text(item)
+//                                .foregroundColor(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
+//                                .padding()
+//                        }
+//                    }
+//                    Image(systemName: isFavourite ? "heart.fill" : "heart")
+//                        .font(.system(size: 20))
+//                        .foregroundColor(.red)
+//                        .onTapGesture {
+//                            isFavourite.toggle()
+//                        }
+//                }
+//                TabView(selection: $selectedTab) {
+//                    // Deepl
+//
+//                            Text(translatedText1)
+//                                .font(.system(size: 16))
+//                                .foregroundColor(.black)
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//                                .padding()
+//                                .tag(0)
+//
+//
+//                    // Google
+//
+//                            Text(translatedText2)
+//                                .font(.system(size: 16))
+//                                .foregroundColor(.black)
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//                                .padding()
+//                                .tag(1)
+//
+//
+//                    // Bing
+//
+//                            Text(translatedText3)
+//                                .font(.system(size: 16))
+//                                .foregroundColor(.black)
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//                                .padding()
+//                                .tag(2)
+//
+//
+//                }
+//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//
+//            }
             VStack {
-                
                 Image(systemName: "chevron.left")
-                    .foregroundColor(.blue)
-                    .offset(x: -160, y: 0)
-                    .onTapGesture {
-                        detailView.toggle()
-                    }
-                Text(originalText)
-                    .font(.system(size: 16))
-                    .foregroundColor(.black)
-                    .padding()
-                    
+                                    .foregroundColor(.blue)
+                                    .offset(x: -160, y: 0)
+                                    .onTapGesture {
+                                        detailView.toggle()
+                                    }
+                    TranslateResultView(originalText: originalText, from: from, to: to)
+                    .id(selectedObjectID)
+                            .gesture(
+                                            DragGesture()
+                                                .onEnded { value in
+                                                    guard let currentObjectIndex = translatedTexts.firstIndex(where: { $0.id == selectedObjectID }) else {
+                                                            return
+                                                        }
+                                                    print(currentObjectIndex)
 
-                // three buttons mean 3 different translate sources
-                // Deepl, Google, Bing
-                // hstack leading
-                Divider()
-                HStack(spacing: 34) {
-                    ForEach(translateSources, id: \.self) { item in
-                        Button(action: {
-                            selectedTab = translateSources.firstIndex(of: item)!
-                        }) {
-                            Text(item)
-                                .foregroundColor(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
-                                .padding()
-                        }
-                    }
-                    Image(systemName: isFavourite ? "heart.fill" : "heart")
-                        .font(.system(size: 20))
-                        .foregroundColor(.red)
-                        .onTapGesture {
-                            isFavourite.toggle()
-                        }
-                }
-                TabView(selection: $selectedTab) {
-                    // Deepl
-                    
-                            Text(translatedText1)
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .padding()
-                                .tag(0)
-                        
-                        
-                    // Google
-                    
-                            Text(translatedText2)
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .padding()
-                                .tag(1)
-                        
-                        
-                    // Bing
-                    
-                            Text(translatedText3)
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .padding()
-                                .tag(2)
-                        
-                        
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
+                                                        if value.translation.height > 100 {
+                                                            
+                                                            print("swipe down")
+                                                            // Swipe down, show the previous object
+                                                            if currentObjectIndex > 0 {
+                                                                detailView = false
+                                                                updateDetailData(translatedTexts[currentObjectIndex - 1])
+                                                                print(originalText)
+                                                            }
+                                                        } else if value.translation.height < -100 {
+                                                            print("swipe up")
+
+                                                            // Swipe up, show the next object
+                                                            if currentObjectIndex < translatedTexts.count - 1 {
+                                                                detailView = false
+
+                                                                updateDetailData(translatedTexts[currentObjectIndex + 1])
+                                                                print(originalText)
+                                                            }
+                                                        }
+                                                }
+                                        )
             }
-            .gesture(
-                            DragGesture()
-                                .onEnded { value in
-                                    guard let currentObjectIndex = translatedTexts.firstIndex(where: { $0.id == selectedObjectID }) else {
-                                            return
-                                        }
-                                    print(currentObjectIndex)
-
-                                        if value.translation.height > 100 {
-                                            
-                                            print("swipe down")
-                                            // Swipe down, show the previous object
-                                            if currentObjectIndex > 0 {
-                                                updateDetailData(translatedTexts[currentObjectIndex - 1])
-                                                print(originalText + ":" + translatedText1)
-                                            }
-                                        } else if value.translation.height < -100 {
-                                            print("swipe up")
-
-                                            // Swipe up, show the next object
-                                            if currentObjectIndex < translatedTexts.count - 1 {
-                                                updateDetailData(translatedTexts[currentObjectIndex + 1])
-                                                print(originalText + ":" + translatedText1)
-                                            }
-                                        }
-                                }
-                        )
+            
             
         }
     }
@@ -151,10 +164,8 @@ struct HistoryPageView: View {
     func updateDetailData(_ translatedText: TranslatedText) {
         selectedObjectID = translatedText.id
         originalText = translatedText.original_text ?? ""
-        translatedText1 = translatedText.translated_text1 ?? ""
-        translatedText2 = translatedText.translated_text2 ?? ""
-        translatedText3 = translatedText.translated_text3 ?? ""
-        isFavourite = translatedText.favourite
+        from = translatedText.source_language ?? ""
+        to = translatedText.target_language ?? ""
         detailView = true
     }
     
