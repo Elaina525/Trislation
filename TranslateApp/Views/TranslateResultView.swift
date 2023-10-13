@@ -52,6 +52,7 @@ struct TranslateResultView: View {
         if checkDatabase() {
             return // 如果数据库中存在匹配的条目，直接返回
         }
+
         fetchTranslation(using: { text, completion in
             baiduTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
                 completion(translatedText, error)
@@ -63,6 +64,18 @@ struct TranslateResultView: View {
                 saveToDatabase()
             }
         }
+
+        // fetchTranslation(using: { text, completion in
+        //     googleTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
+        //         completion(translatedText, error)
+        //     }
+        // }) { googleTranslatedText, _ in
+        //     if let googleTranslatedText = googleTranslatedText {
+        //         translatedText1 = googleTranslatedText
+        //         print("Google: \(translatedText1)")
+        //         saveToDatabase()
+        //     }
+        // }
 
         fetchTranslation(using: { text, completion in
             deeplTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
@@ -225,6 +238,7 @@ struct TranslateResultView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding()
                     .tag(2)
+
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
