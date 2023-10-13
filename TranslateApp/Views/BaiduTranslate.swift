@@ -16,8 +16,8 @@ import SwiftUI
         let requestBody: [String: Any] = [
             "appid": appid,
             "q": text,
-            "from": from,
-            "to": to,
+            "from": convertToShortLanguage(from),
+            "to": convertToShortLanguage(to),
             "salt": salt,
             "sign": md5Sign,
         ]
@@ -61,6 +61,18 @@ extension Dictionary {
         .data(using: .utf8)
     }
 }
+
+fileprivate func convertToShortLanguage(_ fullLanguage: String) -> String {
+    let languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
+    let shortLanguages = ["en", "spa", "fra", "de", "zh", "jp", "ru", "ara"]
+
+    if fullLanguage == "Auto" {
+        return "auto"
+    }
+    let index = languages.firstIndex(of: fullLanguage) ?? 0
+    return shortLanguages[index]
+}
+
 
 struct BaiduTranslation: Codable {
     let from: String

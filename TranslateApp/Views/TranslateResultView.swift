@@ -13,8 +13,8 @@ struct TranslateResultView: View {
     @StateObject private var speechToText = SpeechToText()
 
     @State var originalText: String
-    @State var from: String
-    @State var to: String
+    // @State var from: String
+    // @State var to: String
 
     // translatedText is an arry of 3 strings
     // @State var translatedText: [String] = ["12", "", ""]
@@ -48,11 +48,12 @@ struct TranslateResultView: View {
     }
 
     func fetchTranslations() {
+        print("from: \(leftLanguage), to: \(rightLanguage)")
         if checkDatabase() {
             return // 如果数据库中存在匹配的条目，直接返回
         }
         fetchTranslation(using: { text, completion in
-            baiduTranslate(text: text, from: from, to: to) { translatedText, error in
+            baiduTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
                 completion(translatedText, error)
             }
         }) { baiduTranslatedText, _ in
@@ -64,7 +65,7 @@ struct TranslateResultView: View {
         }
 
         fetchTranslation(using: { text, completion in
-            deeplTranslate(text: text, from: from, to: to) { translatedText, error in
+            deeplTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
                 completion(translatedText, error)
             }
         }) { deeplTranslatedText, _ in
@@ -76,7 +77,7 @@ struct TranslateResultView: View {
         }
 
         fetchTranslation(using: { text, completion in
-            azureTranslate(text: text, from: from, to: to) { translatedText, error in
+            azureTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
                 completion(translatedText, error)
             }
         }) { azureTranslatedText, _ in
@@ -152,8 +153,8 @@ struct TranslateResultView: View {
             translatedText.setValue("Baidu", forKey: "source1")
             translatedText.setValue("DeepL", forKey: "source2")
             translatedText.setValue("Azure", forKey: "source3")
-            translatedText.setValue(from, forKey: "source_language")
-            translatedText.setValue(to, forKey: "target_language")
+            translatedText.setValue(leftLanguage, forKey: "source_language")
+            translatedText.setValue(rightLanguage, forKey: "target_language")
             translatedText.setValue(translatedText1, forKey: "translated_text1")
             translatedText.setValue(translatedText2, forKey: "translated_text2")
             translatedText.setValue(translatedText3, forKey: "translated_text3")
@@ -167,6 +168,8 @@ struct TranslateResultView: View {
             }
         }
     }
+
+
 
     var body: some View {
         VStack {
@@ -311,6 +314,6 @@ struct TranslateResultView: View {
 
 struct TranslateResultView_Previews: PreviewProvider {
     static var previews: some View {
-        TranslateResultView(originalText: "Today is yours", from: "auto", to: "zh")
+        TranslateResultView(originalText: "Today is yours", leftLanguage: "Auto", rightLanguage: "Chinese")
     }
 }

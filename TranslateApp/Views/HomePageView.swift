@@ -13,12 +13,11 @@ struct HomePageView: View {
     @State var leftLanguage: String = "Auto"
     @State var rightLanguage: String = "Chinese"
     @State var isTranslating = false
-    @State var from: String
-    @State var to: String
+    // @State var from: String
+    // @State var to: String
     
     var translateSources = ["Baidu", "DeepL", "Azure"]
     var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
-    var shortLanguages = ["en", "es", "fr", "de", "zh", "ja", "ru", "ar"]
     var leftLanguageOptions: [String] { ["Auto"] + languages.filter { $0 != rightLanguage } }
     var rightLanguageOptions: [String] { languages.filter { $0 != leftLanguage } }
     
@@ -103,18 +102,20 @@ struct HomePageView: View {
             .cornerRadius(20)
             .edgesIgnoringSafeArea(.bottom)
         } else {
-            TranslateResultView(originalText: originalText, from: from, to: to)
+            TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
         }
         
         
         
         
     }
+
+    
 }
 
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePageView(from: "auto", to: "zh")
+        HomePageView()
     }
 }

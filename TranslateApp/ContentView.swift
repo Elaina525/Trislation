@@ -40,7 +40,7 @@ struct ContentView: View {
             }
             
             TabView(selection: $selectedTab) {
-                HomePageView(from: "auto", to: "zh")
+                HomePageView()
                     .tag(0)
 
                 HistoryPageView()
