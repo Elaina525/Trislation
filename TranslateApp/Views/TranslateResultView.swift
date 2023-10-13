@@ -176,145 +176,146 @@ struct TranslateResultView: View {
 
 
     var body: some View {
-        VStack {
-            TextField("Enter text", text: $originalText)
+    VStack {
+        TextField("Enter text", text: $originalText)
+            .font(.system(size: 16))
+            .foregroundColor(.black)
+            .padding()
+            .onSubmit {
+                translatedText1 = ""
+                translatedText2 = ""
+                translatedText3 = ""
+                fetchTranslations() // 假设您已经定义了这个函数
+            }
 
-                .font(.system(size: 16))
-                .foregroundColor(.black)
-                .padding()
-                .onSubmit {
+        GeometryReader { geometry in
+            VStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 15) // 圆角矩形作为背景
+                        .fill(Color.gray)
+                        .frame(width: geometry.size.width - 40, height: 35) // 减去两侧的空间
+
+                    RoundedRectangle(cornerRadius: 15) // 圆角矩形作为气泡
+                        .fill(Color.blue)
+                        .frame(width: (geometry.size.width - 40) / CGFloat(translateSources.count), height: 35)
+                        .offset(x: CGFloat(selectedTab) * ((geometry.size.width - 40) / CGFloat(translateSources.count)) - (geometry.size.width - 40) / 2 + ((geometry.size.width - 40) / CGFloat(translateSources.count)) / 2)
+                        .animation(.easeInOut) // 添加动画
+
+                    HStack(spacing: 0) { // 将HStack移动到ZStack的最上层
+                        ForEach(0 ..< translateSources.count, id: \.self) { index in
+                            Button(action: {
+                                withAnimation {
+                                    selectedTab = index
+                                }
+                            }) {
+                                Text(translateSources[index])
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: (geometry.size.width - 40) / CGFloat(translateSources.count), height: 35)
+                        }
+                    }
+                    .padding(.horizontal, 20) // 在此添加水平填充
+                }
+
+                TabView(selection: $selectedTab) {
+                    Text(translatedText1)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding()
+                        .tag(0)
+
+                    Text(translatedText2)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding()
+                        .tag(1)
+
+                    Text(translatedText3)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding()
+                        .tag(2)
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            }
+        }
+
+        Spacer()
+        VStack {
+            Button {
+                speechToText.toggleRecording()
+                originalText = speechToText.transcript
+                if speechToText.isRecording == false {
+                    speechToText.transcript = ""
                     translatedText1 = ""
                     translatedText2 = ""
                     translatedText3 = ""
                     fetchTranslations()
                 }
 
-            // three buttons mean 3 different translate sources
-            // Deepl, Google, Bing
-            // hstack leading
-            Divider()
-            HStack(spacing: 30) {
-                ForEach(translateSources, id: \.self) { item in
-                    Button(action: {
-                        selectedTab = translateSources.firstIndex(of: item)!
-                    }) {
-                        Text(item)
-                            .foregroundColor(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
-                            .padding()
-                    }
-                }
-                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                    .font(.system(size: 20))
-                    .foregroundColor(.red)
-                    .onTapGesture {
-                        isFavourite.toggle()
-                        updateFavouriteInDatabase() // 更新数据库
-                    }
+            } label: {
+                Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
+                    .resizable()
+                    .frame(width: 35, height: 50)
             }
-            TabView(selection: $selectedTab) {
-                // Deepl
+            .frame(width: 100, height: 100)
+            .foregroundColor(.white)
+            .background(.blue)
+            .cornerRadius(50)
 
-                Text(translatedText1)
-                    .font(.system(size: 16))
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .padding()
-                    .tag(0)
+            HStack {
+                // Language Switching
+                Picker("Left Language", selection: $leftLanguage) {
+                    ForEach(leftLanguageOptions, id: \.self) { language in
+                        Text(language)
+                    }
+                }
+                .frame(width: 120, height: 35)
+                .background(Color(UIColor.systemGray4))
+                .cornerRadius(8)
 
-                // Google
+                Button(action: {
+                    withAnimation {
+                        swap(&leftLanguage, &rightLanguage)
+                    }
+                }) {
+                    Image(systemName: "arrow.left.arrow.right")
+                }
 
-                Text(translatedText2)
-                    .font(.system(size: 16))
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .padding()
-                    .tag(1)
-
-                // Bing
-
-                Text(translatedText3)
-                    .font(.system(size: 16))
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .padding()
-                    .tag(2)
-
+                Picker("Right Language", selection: $rightLanguage) {
+                    ForEach(rightLanguageOptions, id: \.self) { language in
+                        Text(language)
+                    }
+                }
+                .frame(width: 120, height: 35)
+                .background(Color(UIColor.systemGray4))
+                .cornerRadius(8)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-
-            Spacer()
-            VStack {
-                Button {
-                    speechToText.toggleRecording()
-                    originalText = speechToText.transcript
-                    if speechToText.isRecording == false {
-                        speechToText.transcript = ""
-                        translatedText1 = ""
-                        translatedText2 = ""
-                        translatedText3 = ""
-                        fetchTranslations()
-                    }
-
-                } label: {
-                    Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
-                        .resizable()
-                        .frame(width: 35, height: 50)
+            .onChange(of: leftLanguage) { _ in
+                if leftLanguage == rightLanguage {
+                    rightLanguage = rightLanguageOptions.first!
                 }
-                .frame(width: 100, height: 100)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(50)
-
-                HStack {
-                    // Language Switching
-                    Picker("Left Language", selection: $leftLanguage) {
-                        ForEach(leftLanguageOptions, id: \.self) { language in
-                            Text(language)
-                        }
-                    }
-                    .frame(width: 120, height: 35)
-                    .background(Color(UIColor.systemGray4))
-                    .cornerRadius(8)
-
-                    Button(action: {
-                        withAnimation {
-                            swap(&leftLanguage, &rightLanguage)
-                        }
-                    }) {
-                        Image(systemName: "arrow.left.arrow.right")
-                    }
-
-                    Picker("Right Language", selection: $rightLanguage) {
-                        ForEach(rightLanguageOptions, id: \.self) { language in
-                            Text(language)
-                        }
-                    }
-                    .frame(width: 120, height: 35)
-                    .background(Color(UIColor.systemGray4))
-                    .cornerRadius(8)
-                }
-                .onChange(of: leftLanguage) { _ in
-                    if leftLanguage == rightLanguage {
-                        rightLanguage = rightLanguageOptions.first!
-                    }
-                }
-                .onChange(of: rightLanguage) { _ in
-                    if leftLanguage == rightLanguage {
-                        leftLanguage = leftLanguageOptions.first!
-                    }
-                }
-                .padding()
-                Text(translatedText1)
-                    .font(.system(size: 1))
-                    .hidden()
             }
+            .onChange(of: rightLanguage) { _ in
+                if leftLanguage == rightLanguage {
+                    leftLanguage = leftLanguageOptions.first!
+                }
+            }
+            .padding()
+            Text(translatedText1)
+                .font(.system(size: 1))
+                .hidden()
         }
-        .padding(.horizontal)
-        .background(Color(UIColor.systemGray6))
-        .cornerRadius(20)
-        .edgesIgnoringSafeArea(.bottom)
-        .onAppear(perform: fetchTranslations)
     }
+    .padding(.horizontal)
+    .background(Color(UIColor.systemGray6))
+    .cornerRadius(20)
+    .edgesIgnoringSafeArea(.bottom)
+    // .onAppear(perform: fetchTranslations) // 假设您已经定义了这个函数
+}
 }
 
 struct TranslateResultView_Previews: PreviewProvider {
