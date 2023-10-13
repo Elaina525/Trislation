@@ -93,7 +93,7 @@ struct TranslateResultView: View {
         // 创建一个请求对象
         let fetchRequest: NSFetchRequest<TranslatedText> = TranslatedText.fetchRequest()
         // 设置过滤条件
-        fetchRequest.predicate = NSPredicate(format: "original_text == %@", originalText)
+        fetchRequest.predicate = NSPredicate(format: "original_text == %@ AND target_language == %@", originalText, rightLanguage)
         do {
             // 执行请求
             let results = try managedObjectContext.fetch(fetchRequest)

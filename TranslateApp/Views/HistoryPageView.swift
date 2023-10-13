@@ -44,76 +44,7 @@ struct HistoryPageView: View {
                         Spacer()
                     }
         } else {
-//            VStack {
-//
-//                Image(systemName: "chevron.left")
-//                    .foregroundColor(.blue)
-//                    .offset(x: -160, y: 0)
-//                    .onTapGesture {
-//                        detailView.toggle()
-//                    }
-//                Text(originalText)
-//                    .font(.system(size: 16))
-//                    .foregroundColor(.black)
-//                    .padding()
-//
-//
-//                // three buttons mean 3 different translate sources
-//                // Deepl, Google, Bing
-//                // hstack leading
-//                Divider()
-//                HStack(spacing: 34) {
-//                    ForEach(translateSources, id: \.self) { item in
-//                        Button(action: {
-//                            selectedTab = translateSources.firstIndex(of: item)!
-//                        }) {
-//                            Text(item)
-//                                .foregroundColor(selectedTab == translateSources.firstIndex(of: item)! ? Color.blue : Color.gray)
-//                                .padding()
-//                        }
-//                    }
-//                    Image(systemName: isFavourite ? "heart.fill" : "heart")
-//                        .font(.system(size: 20))
-//                        .foregroundColor(.red)
-//                        .onTapGesture {
-//                            isFavourite.toggle()
-//                        }
-//                }
-//                TabView(selection: $selectedTab) {
-//                    // Deepl
-//
-//                            Text(translatedText1)
-//                                .font(.system(size: 16))
-//                                .foregroundColor(.black)
-//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-//                                .padding()
-//                                .tag(0)
-//
-//
-//                    // Google
-//
-//                            Text(translatedText2)
-//                                .font(.system(size: 16))
-//                                .foregroundColor(.black)
-//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-//                                .padding()
-//                                .tag(1)
-//
-//
-//                    // Bing
-//
-//                            Text(translatedText3)
-//                                .font(.system(size: 16))
-//                                .foregroundColor(.black)
-//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-//                                .padding()
-//                                .tag(2)
-//
-//
-//                }
-//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-//
-//            }
+
             VStack {
                 Image(systemName: "chevron.left")
                                     .foregroundColor(.blue)
@@ -121,7 +52,7 @@ struct HistoryPageView: View {
                                     .onTapGesture {
                                         detailView.toggle()
                                     }
-                    TranslateResultView(originalText: originalText, from: from, to: to)
+                    TranslateResultView(originalText: originalText)
                     .id(selectedObjectID)
                             .gesture(
                                             DragGesture()
