@@ -7,27 +7,25 @@ enum PageState {
 
 struct HomePageView: View {
     @StateObject private var speechToText = SpeechToText()
-    
+    @AppStorage("DefaultLanguage") var defaultLanguage: String = "English"
 
     @State var originalText: String = ""
     @State var leftLanguage: String = "Auto"
-    @State var rightLanguage: String = "Chinese"
+    @State var rightLanguage: String = "English"
     @State var isTranslating = false
     // @State var from: String
     // @State var to: String
-    
+
     var translateSources = ["Baidu", "DeepL", "Azure"]
     var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
     var leftLanguageOptions: [String] { ["Auto"] + languages.filter { $0 != rightLanguage } }
     var rightLanguageOptions: [String] { languages.filter { $0 != leftLanguage } }
-    
-    
+
     var body: some View {
         //        switch currentPage {
         //        case .home:
         if isTranslating == false {
             VStack {
-                
                 TextField("Type here", text: $originalText)
                     .padding()
                     .foregroundColor(.black)
@@ -35,9 +33,9 @@ struct HomePageView: View {
                     .onSubmit {
                         isTranslating.toggle()
                     }
-                
+
                 Spacer()
-                
+
                 Button {
                     speechToText.toggleRecording()
                     originalText = speechToText.transcript
@@ -45,7 +43,7 @@ struct HomePageView: View {
                         speechToText.transcript = ""
                         isTranslating.toggle()
                     }
-                    
+
                 } label: {
                     Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
                         .resizable()
@@ -55,7 +53,7 @@ struct HomePageView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(50)
-                
+
                 HStack {
                     // Language Switching
                     Picker("Left Language", selection: $leftLanguage) {
@@ -66,7 +64,7 @@ struct HomePageView: View {
                     .frame(width: 120, height: 35)
                     .background(Color(UIColor.systemGray4))
                     .cornerRadius(8)
-                    
+
                     Button(action: {
                         withAnimation {
                             swap(&leftLanguage, &rightLanguage)
@@ -74,7 +72,7 @@ struct HomePageView: View {
                     }) {
                         Image(systemName: "arrow.left.arrow.right")
                     }
-                    
+
                     Picker("Right Language", selection: $rightLanguage) {
                         ForEach(rightLanguageOptions, id: \.self) { language in
                             Text(language)
@@ -101,18 +99,14 @@ struct HomePageView: View {
             .background(Color(UIColor.systemGray6))
             .cornerRadius(20)
             .edgesIgnoringSafeArea(.bottom)
+            .onAppear {
+                self.rightLanguage = self.defaultLanguage
+            }
         } else {
             TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
         }
-        
-        
-        
-        
     }
-
-    
 }
-
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {

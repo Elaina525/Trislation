@@ -14,8 +14,8 @@ struct SettingPageView: View {
     @State private var isAuthenticated = false
     @State var userProfile = Profile.empty
 
-    @State private var previewIndex = 0
-    var defaultLanguage: [String] = ["English", "Spanish", "French", "German"]
+    @AppStorage("DefaultLanguage") var defaultLanguage: String = "English"
+    var languageOptions: [String] = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
 
     var body: some View {
         NavigationStack {
@@ -24,8 +24,8 @@ struct SettingPageView: View {
                     if isAuthenticated {
                         HStack {
                             UserImage(urlString: userProfile.picture)
-                                           .clipShape(Circle())
-                                           .frame(width: 70, height: 70)
+                                .clipShape(Circle())
+                                .frame(width: 70, height: 70)
                             VStack(alignment: .leading) {
                                 Text(userProfile.name)
                                     .font(.headline)
@@ -47,9 +47,9 @@ struct SettingPageView: View {
                 }
 
                 Section(header: Text("Translate")) {
-                    Picker(selection: $previewIndex, label: Text("Default Language")) {
-                        ForEach(0 ..< defaultLanguage.count) {
-                            Text(self.defaultLanguage[$0])
+                    Picker(selection: $defaultLanguage, label: Text("Default Language")) {
+                        ForEach(languageOptions, id: \.self) { language in
+                            Text(language)
                         }
                     }
                 }
@@ -77,32 +77,34 @@ struct SettingPageView: View {
                 Text("Done")
             })
         }
+
+        
     }
 
-struct UserImage: View {
-    var urlString: String
+    struct UserImage: View {
+        var urlString: String
 
-    var body: some View {
-        AsyncImage(url: URL(string: urlString)) { image in
-            image
-                .resizable()
-                .scaledToFit()
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-        } placeholder: {
-            Image(systemName: "person.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                .foregroundColor(.blue)
-                .opacity(0.5)
+        var body: some View {
+            AsyncImage(url: URL(string: urlString)) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+            } placeholder: {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                    .foregroundColor(.blue)
+                    .opacity(0.5)
+            }
+            .padding(40) // 如果需要，可以调整这个填充值
         }
-        .padding(40) // 如果需要，可以调整这个填充值
     }
-}
 
     // MARK: View modifiers
 
