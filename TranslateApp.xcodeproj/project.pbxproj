@@ -12,6 +12,10 @@
 		6A0D23CE2AD5B797005B9081 /* Sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A0D23CD2AD5B797005B9081 /* Sample.json */; };
 		6A2323912AD062320099D612 /* DeeplTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2323902AD062320099D612 /* DeeplTranslate.swift */; };
 		6A2323952AD0649A0099D612 /* AzureTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2323942AD0649A0099D612 /* AzureTranslate.swift */; };
+		6A3F1E292AD97B8D009353E8 /* GoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1E282AD97B8D009353E8 /* GoogleTranslate.swift */; };
+		6A3F1E2C2AD99049009353E8 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 6A3F1E2B2AD99049009353E8 /* Auth0 */; };
+		6A3F1E2E2AD99481009353E8 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A3F1E2D2AD99481009353E8 /* Auth0.plist */; };
+		6A3F1E302AD9952D009353E8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1E2F2AD9952D009353E8 /* Profile.swift */; };
 		6A7232F72AD68AA3000845DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7232F62AD68AA3000845DA /* AppDelegate.swift */; };
 		6A7232F92AD68E59000845DA /* CoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7232F82AD68E59000845DA /* CoreDataTest.swift */; };
 		728B29642AD741880008A480 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B29632AD741880008A480 /* SpeechToText.swift */; };
@@ -35,6 +39,10 @@
 		6A0D23CD2AD5B797005B9081 /* Sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sample.json; sourceTree = "<group>"; };
 		6A2323902AD062320099D612 /* DeeplTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplTranslate.swift; sourceTree = "<group>"; };
 		6A2323942AD0649A0099D612 /* AzureTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTranslate.swift; sourceTree = "<group>"; };
+		6A3F1E272AD97122009353E8 /* TranslateApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateApp.entitlements; sourceTree = "<group>"; };
+		6A3F1E282AD97B8D009353E8 /* GoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTranslate.swift; sourceTree = "<group>"; };
+		6A3F1E2D2AD99481009353E8 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		6A3F1E2F2AD9952D009353E8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		6A7232F62AD68AA3000845DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A7232F82AD68E59000845DA /* CoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTest.swift; sourceTree = "<group>"; };
 		728B29632AD741880008A480 /* SpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
@@ -58,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3F1E2C2AD99049009353E8 /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +100,7 @@
 		729A2F8F2A7A2A69006A71FA /* TranslateApp */ = {
 			isa = PBXGroup;
 			children = (
+				6A3F1E272AD97122009353E8 /* TranslateApp.entitlements */,
 				47656D2A2A9B456A00F18EB6 /* Layouts */,
 				72C5EFCE2A95ACE200444399 /* Models */,
 				72CF3EEA2A8364BD007A4E23 /* Views */,
@@ -99,6 +109,7 @@
 				729A2F942A7A2A6A006A71FA /* Assets.xcassets */,
 				729A2F962A7A2A6A006A71FA /* Preview Content */,
 				72C492222ACD339000805239 /* Translation.xcdatamodeld */,
+				6A3F1E2D2AD99481009353E8 /* Auth0.plist */,
 			);
 			path = TranslateApp;
 			sourceTree = "<group>";
@@ -115,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				6A7232F62AD68AA3000845DA /* AppDelegate.swift */,
+				6A3F1E2F2AD9952D009353E8 /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,6 +147,7 @@
 				6A2323902AD062320099D612 /* DeeplTranslate.swift */,
 				6A2323942AD0649A0099D612 /* AzureTranslate.swift */,
 				6A7232F82AD68E59000845DA /* CoreDataTest.swift */,
+				6A3F1E282AD97B8D009353E8 /* GoogleTranslate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +168,9 @@
 			dependencies = (
 			);
 			name = TranslateApp;
+			packageProductDependencies = (
+				6A3F1E2B2AD99049009353E8 /* Auth0 */,
+			);
 			productName = TranslateApp;
 			productReference = 729A2F8D2A7A2A69006A71FA /* TranslateApp.app */;
 			productType = "com.apple.product-type.application";
@@ -183,6 +199,9 @@
 				Base,
 			);
 			mainGroup = 729A2F842A7A2A69006A71FA;
+			packageReferences = (
+				6A3F1E2A2AD99049009353E8 /* XCRemoteSwiftPackageReference "Auth0.swift" */,
+			);
 			productRefGroup = 729A2F8E2A7A2A69006A71FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,6 +219,7 @@
 				729A2F982A7A2A6A006A71FA /* Preview Assets.xcassets in Resources */,
 				729A2F952A7A2A6A006A71FA /* Assets.xcassets in Resources */,
 				6A0D23CE2AD5B797005B9081 /* Sample.json in Resources */,
+				6A3F1E2E2AD99481009353E8 /* Auth0.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +233,7 @@
 				6A7232F92AD68E59000845DA /* CoreDataTest.swift in Sources */,
 				72C5EFD22A95AD6700444399 /* UtilsLayouts.swift in Sources */,
 				4739BAE82A990E0C00A7164B /* SettingPageView.swift in Sources */,
+				6A3F1E292AD97B8D009353E8 /* GoogleTranslate.swift in Sources */,
 				729A2F932A7A2A69006A71FA /* ContentView.swift in Sources */,
 				6A7232F72AD68AA3000845DA /* AppDelegate.swift in Sources */,
 				728B29642AD741880008A480 /* SpeechToText.swift in Sources */,
@@ -225,6 +246,7 @@
 				47210E2E2A9A8AE00023E70C /* TranslateResultView.swift in Sources */,
 				72C5EFCD2A95AC0700444399 /* FavouritesPageView.swift in Sources */,
 				72C492242ACD339000805239 /* Translation.xcdatamodeld in Sources */,
+				6A3F1E302AD9952D009353E8 /* Profile.swift in Sources */,
 				72C5EFCB2A94BD5A00444399 /* HistoryPageView.swift in Sources */,
 				729A2F912A7A2A69006A71FA /* TranslateAppApp.swift in Sources */,
 			);
@@ -352,10 +374,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TranslateApp/TranslateApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TranslateApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5CG9N4VY73;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
@@ -371,7 +394,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.TranslateApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.rmit.TranslateApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -384,10 +407,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TranslateApp/TranslateApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TranslateApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5CG9N4VY73;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
@@ -403,7 +427,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.TranslateApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.rmit.TranslateApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -433,6 +457,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A3F1E2A2AD99049009353E8 /* XCRemoteSwiftPackageReference "Auth0.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A3F1E2B2AD99049009353E8 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A3F1E2A2AD99049009353E8 /* XCRemoteSwiftPackageReference "Auth0.swift" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		72C492222ACD339000805239 /* Translation.xcdatamodeld */ = {
