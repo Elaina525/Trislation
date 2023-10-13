@@ -31,28 +31,27 @@ struct HistoryPageView: View {
     @State private var offset: CGFloat = 0.0
 
     var body: some View {
-        if detailView == false {
-            VStack {
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(translatedTexts, id: \.self) { translatedText in
-                        TranslateTextRow(data: translatedText)
-                            .onTapGesture {
-                                updateDetailData(translatedText)
-                                guard let currentObjectIndex = translatedTexts.firstIndex(where: { $0.id == selectedObjectID }) else {
-                                    return
-                                }
-                                if currentObjectIndex > 0 {
-                                    previousOriginalText = translatedTexts[currentObjectIndex - 1].original_text ?? ""
-                                    previousObjectID = translatedTexts[currentObjectIndex - 1].id ?? nil
-                                }
-
-                                print(originalText)
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                ForEach(translatedTexts, id: \.self) { translatedText in
+                    TranslateTextRow(data: translatedText)
+                        .onTapGesture {
+                            updateDetailData(translatedText)
+                            guard let currentObjectIndex = translatedTexts.firstIndex(where: { $0.id == selectedObjectID }) else {
+                                return
                             }
-                    }
+                            if currentObjectIndex > 0 {
+                                previousOriginalText = translatedTexts[currentObjectIndex - 1].original_text ?? ""
+                                previousObjectID = translatedTexts[currentObjectIndex - 1].id ?? nil
+                            }
+
+                            print(originalText)
+                        }
                 }
-                Spacer()
             }
-        } else {
+            Spacer()
+        }
+        .fullScreenCover(isPresented: $detailView) {
             VStack {
                 let yOffset: CGFloat = selectedTab == 0 ? offset : -offset
                 Image(systemName: "chevron.left")

@@ -24,7 +24,7 @@ struct HomePageView: View {
     var body: some View {
         //        switch currentPage {
         //        case .home:
-        if isTranslating == false {
+        
             VStack {
                 TextField("Type here", text: $originalText)
                     .padding()
@@ -102,9 +102,9 @@ struct HomePageView: View {
             .onAppear {
                 self.rightLanguage = self.defaultLanguage
             }
-        } else {
+            .fullScreenCover(isPresented: $isTranslating) { 
             TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
-        }
+            }
     }
 }
 
