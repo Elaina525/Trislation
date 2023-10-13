@@ -24,7 +24,7 @@ struct FavouritesPageView: View {
     
     @FetchRequest(
         entity: TranslatedText.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: false)],
         predicate: NSPredicate(format: "favourite == true")
     ) var translatedTexts: FetchedResults<TranslatedText>
 

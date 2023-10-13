@@ -24,7 +24,7 @@ struct HistoryPageView: View {
     
     @FetchRequest(
         entity: TranslatedText.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: true)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: false)]
     ) var translatedTexts: FetchedResults<TranslatedText>
 
     var body: some View {
