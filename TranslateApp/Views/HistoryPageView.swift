@@ -15,7 +15,7 @@ struct HistoryPageView: View {
     @State private var selectedObjectID: UUID?
     @State var originalText = ""
     @State var previousOriginalText = ""
-    
+
     @State private var previousObjectID: UUID?
     @State var from = ""
     @State var to = ""
@@ -28,11 +28,10 @@ struct HistoryPageView: View {
         entity: TranslatedText.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: false)]
     ) var translatedTexts: FetchedResults<TranslatedText>
-    
+
     @State private var offset: CGFloat = 0.0
 
     var body: some View {
-        
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(translatedTexts, id: \.self) { translatedText in
@@ -49,8 +48,6 @@ struct HistoryPageView: View {
                             }
 
                             print(originalText)
-                            
-
                         }
                 }
                 Text(originalText)
@@ -61,12 +58,19 @@ struct HistoryPageView: View {
         .fullScreenCover(isPresented: $detailView) {
             VStack {
                 let yOffset: CGFloat = selectedTab == 0 ? offset : -offset
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.blue)
-                    .offset(x: -160, y: 0)
-                    .onTapGesture {
-                        detailView.toggle()
+                HStack {
+                    Button(action: {
+                        self.detailView.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.blue) // 保持与原始代码的颜色一致
+                            Text("Back")
+                                .foregroundColor(.blue) // 使文本颜色与图标颜色相匹配
+                        }
                     }
+                    .offset(x: -160, y: 0)
+                }
                 ZStack {
                     TranslateResultView(originalText: previousOriginalText, leftLanguage: from, rightLanguage: to)
                         .id(previousObjectID)
@@ -123,8 +127,9 @@ struct HistoryPageView: View {
                         )
                 }
             }
+            
         }
-        
+
     }
 
     func updateDetailData(_ translatedText: TranslatedText) {
@@ -134,7 +139,6 @@ struct HistoryPageView: View {
         to = translatedText.target_language ?? ""
         detailView = true
     }
-    
 
     struct HistoryPageView_Previews: PreviewProvider {
         static var previews: some View {

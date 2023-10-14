@@ -10,7 +10,6 @@ struct HomePageView: View {
     @AppStorage("SourceLanguage") var sourceLanguage: String = "Auto"
     @AppStorage("TargetLanguage") var targetLanguage: String = "English"
 
-
     @State var originalText: String = ""
     @State var leftLanguage: String = "Auto"
     @State var rightLanguage: String = "English"
@@ -27,20 +26,19 @@ struct HomePageView: View {
     var body: some View {
         //        switch currentPage {
         //        case .home:
-        
+
+        VStack {
+            TextField("Type here", text: $originalText)
+                .padding()
+                .foregroundColor(.black)
+                .cornerRadius(8)
+                .onSubmit {
+                    isTranslating.toggle()
+                }
+
+            Spacer()
+
             VStack {
-                TextField("Type here", text: $originalText)
-                    .padding()
-                    .foregroundColor(.black)
-                    .cornerRadius(8)
-                    .onSubmit {
-                        isTranslating.toggle()
-                    }
-
-                Spacer()
-
-                
-
                 HStack {
                     // Language Switching
                     Picker("Left Language", selection: $leftLanguage) {
@@ -80,17 +78,16 @@ struct HomePageView: View {
                     }
                 }
                 .padding()
-                
+
                 HStack(spacing: 35) {
-                    
                     Button {
-                        //Nothing
+                        // Nothing
                     } label: {
                         Image(systemName: "star")
                             .foregroundColor(.gray)
                             .font(.system(size: 40))
                     }
-                    
+
                     Button {
                         speechToText.toggleRecording(language: leftLanguage)
                         originalText = speechToText.transcript
@@ -108,7 +105,7 @@ struct HomePageView: View {
                     .foregroundColor(.white)
                     .background(.blue)
                     .cornerRadius(50)
-                    
+
                     Button {
                         settingPage.toggle()
                     } label: {
@@ -118,28 +115,34 @@ struct HomePageView: View {
                     .sheet(isPresented: $settingPage) {
                         SettingPageView()
                     }
-
                 }
-                
             }
-            // add rounded corner on top
             .padding()
             .background(Color(UIColor.systemGray6))
             .cornerRadius(20)
             .edgesIgnoringSafeArea(.bottom)
-            .onAppear {
-                self.rightLanguage = self.targetLanguage
-                self.leftLanguage = self.sourceLanguage
-            }
-            .fullScreenCover(isPresented: $isTranslating) {
-            Image(systemName: "chevron.left")
-                    .foregroundColor(.blue)
-                    .offset(x: -160, y: 0)
-                    .onTapGesture {
-                        isTranslating.toggle()
+        }
+
+        .onAppear {
+            self.rightLanguage = self.targetLanguage
+            self.leftLanguage = self.sourceLanguage
+        }
+        .fullScreenCover(isPresented: $isTranslating) {
+            HStack {
+                Button(action: {
+                    self.isTranslating.toggle()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.blue) // 保持与原始代码的颜色一致
+                        Text("Back")
+                            .foregroundColor(.blue) // 使文本颜色与图标颜色相匹配
                     }
-            TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
+                }
+                .offset(x: -160, y: 0)
             }
+            TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
+        }
     }
 }
 

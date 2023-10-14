@@ -62,12 +62,19 @@ struct FavouritesPageView: View {
         .fullScreenCover(isPresented: $detailView) {
             VStack {
                 let yOffset: CGFloat = selectedTab == 0 ? offset : -offset
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.blue)
-                    .offset(x: -160, y: 0)
-                    .onTapGesture {
-                        detailView.toggle()
+                HStack {
+                    Button(action: {
+                        self.detailView.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.blue) // 保持与原始代码的颜色一致
+                            Text("Back")
+                                .foregroundColor(.blue) // 使文本颜色与图标颜色相匹配
+                        }
                     }
+                    .offset(x: -160, y: 0)
+                }
                 ZStack {
                     TranslateResultView(originalText: previousOriginalText, leftLanguage: from, rightLanguage: to)
                         .id(previousObjectID)

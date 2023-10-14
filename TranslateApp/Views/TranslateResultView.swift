@@ -337,11 +337,18 @@ struct TranslateResultView: View {
                 .font(.system(size: 8.5))
                 .hidden()
         }
-    }
-    .padding(.horizontal)
+        .padding(.horizontal)
     .background(Color(UIColor.systemGray6))
     .cornerRadius(20)
     .edgesIgnoringSafeArea(.bottom)
+
+    }
+    // background white
+    .background(Color.white)
+
+
+
+
     .onAppear(perform: fetchTranslations) // 假设您已经定义了这个函数
 }
 }
