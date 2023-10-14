@@ -331,9 +331,9 @@ struct TranslateResultView: View {
                     SettingPageView()
                 }
             }
-            
+
             Text(translatedText1)
-                .font(.system(size: 1))
+                .font(.system(size: 8.5))
                 .hidden()
         }
     }
