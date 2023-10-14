@@ -311,6 +311,7 @@ struct TranslateResultView: View {
                         translatedText3 = ""
                         fetchTranslations()
                     }
+                        
 
                 } label: {
                     Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
@@ -321,6 +322,7 @@ struct TranslateResultView: View {
                 .foregroundColor(.white)
                 .background(.blue)
                 .cornerRadius(50)
+                
                 
                 Button {
                     settingPage.toggle()

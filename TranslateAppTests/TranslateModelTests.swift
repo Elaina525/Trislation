@@ -22,6 +22,15 @@ final class TranslateModelTests: XCTestCase {
                 XCTAssertEqual(translation, "你好")
             }
         }
+        
+        model.baiduTranslate(text: "你好", from: "Auto", to: "English") { translation, error in
+            XCTAssertNil(error, "Translation request should not produce an error")
+            XCTAssertNotNil(translation, "Translation should not be nil")
+            expectation.fulfill()
+            if let translation = translation {
+                XCTAssertEqual(translation, "hello")
+            }
+        }
 
         wait(for: [expectation], timeout: 10.0)
         
@@ -40,6 +49,15 @@ final class TranslateModelTests: XCTestCase {
             }
         }
 
+        model.deeplTranslate(text: "你好", from: "Auto", to: "English") { translation, error in
+            XCTAssertNil(error, "Translation request should not produce an error")
+            XCTAssertNotNil(translation, "Translation should not be nil")
+            expectation.fulfill()
+            if let translation = translation {
+                XCTAssertEqual(translation, "How are you?")
+            }
+        }
+        
         wait(for: [expectation], timeout: 10.0)
     }
     
@@ -56,6 +74,15 @@ final class TranslateModelTests: XCTestCase {
             }
         }
 
+        model.googleTranslate(text: "你好", from: "Auto", to: "English") { translation, error in
+            XCTAssertNil(error, "Translation request should not produce an error")
+            XCTAssertNotNil(translation, "Translation should not be nil")
+            expectation.fulfill()
+            if let translation = translation {
+                XCTAssertEqual(translation, "Hello")
+            }
+        }
+        
         wait(for: [expectation], timeout: 10.0)
     }
     
@@ -72,6 +99,15 @@ final class TranslateModelTests: XCTestCase {
             }
         }
 
+        model.azureTranslate(text: "你好", from: "Auto", to: "English") { translation, error in
+            XCTAssertNil(error, "Translation request should not produce an error")
+            XCTAssertNotNil(translation, "Translation should not be nil")
+            expectation.fulfill()
+            if let translation = translation {
+                XCTAssertEqual(translation, "Hello")
+            }
+        }
+        
         wait(for: [expectation], timeout: 10.0)
     }
 

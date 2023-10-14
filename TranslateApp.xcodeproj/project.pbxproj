@@ -30,7 +30,7 @@
 		72CF3EE92A83645E007A4E23 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CF3EE82A83645E007A4E23 /* HomePageView.swift */; };
 		72CFF7E42ADAA08900EDDA60 /* TranslateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF7E32ADAA08900EDDA60 /* TranslateAppTests.swift */; };
 		72CFF7EB2ADAAB5500EDDA60 /* TranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF7EA2ADAAB5500EDDA60 /* TranslateModelTests.swift */; };
-		72CFF7EF2ADAB3B400EDDA60 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF7EE2ADAB3B400EDDA60 /* CoreDataTests.swift */; };
+		72CFF7F52ADAC87D00EDDA60 /* SpeechToTextModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF7F42ADAC87D00EDDA60 /* SpeechToTextModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,7 @@
 		72CFF7E12ADAA08900EDDA60 /* TranslateAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CFF7E32ADAA08900EDDA60 /* TranslateAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateAppTests.swift; sourceTree = "<group>"; };
 		72CFF7EA2ADAAB5500EDDA60 /* TranslateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateModelTests.swift; sourceTree = "<group>"; };
-		72CFF7EE2ADAB3B400EDDA60 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		72CFF7F42ADAC87D00EDDA60 /* SpeechToTextModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				72CFF7E32ADAA08900EDDA60 /* TranslateAppTests.swift */,
-				72CFF7EE2ADAB3B400EDDA60 /* CoreDataTests.swift */,
 				72CFF7EA2ADAAB5500EDDA60 /* TranslateModelTests.swift */,
+				72CFF7F42ADAC87D00EDDA60 /* SpeechToTextModelTests.swift */,
 			);
 			path = TranslateAppTests;
 			sourceTree = "<group>";
@@ -311,8 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				72CFF7EB2ADAAB5500EDDA60 /* TranslateModelTests.swift in Sources */,
+				72CFF7F52ADAC87D00EDDA60 /* SpeechToTextModelTests.swift in Sources */,
 				72CFF7E42ADAA08900EDDA60 /* TranslateAppTests.swift in Sources */,
-				72CFF7EF2ADAB3B400EDDA60 /* CoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
