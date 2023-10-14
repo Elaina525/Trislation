@@ -10,10 +10,10 @@ import Speech
 import SwiftUI
 
 class SpeechToText: ObservableObject {
-    private var audioEngine = AVAudioEngine()
-    private var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
+    var audioEngine = AVAudioEngine()
+    var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
 
     @Published var isRecording = false
     @Published var transcript = ""
@@ -40,7 +40,7 @@ class SpeechToText: ObservableObject {
         isRecording.toggle()
     }
 
-    private func languageChange(language: String) {
+    func languageChange(language: String) {
         let languages_long = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
         let languages_short = ["en_US", "es_ES", "fr_FR", "de_DE", "zh_CN", "ja_JP", "ru_RU", "ar_SA"]
 
@@ -51,7 +51,7 @@ class SpeechToText: ObservableObject {
         }
     }
 
-    private func startRecording() throws {
+    func startRecording() throws {
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
             self.recognitionTask = nil
