@@ -8,7 +8,7 @@
 import Foundation
 
 func googleTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
-    let authKey = "AIzaSyAO-eND1L8onf6YhUi8opbTOSV-DQE7iPw"
+    let authKey = "AIzaSyDENfMZiBIBggzfp1WAi7ysnKpHfGeIbHk"
 let url = URL(string: "https://translation.googleapis.com/language/translate/v2")!
 
     var request = URLRequest(url: url)

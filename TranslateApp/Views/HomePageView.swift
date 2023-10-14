@@ -15,6 +15,7 @@ struct HomePageView: View {
     @State var leftLanguage: String = "Auto"
     @State var rightLanguage: String = "English"
     @State var isTranslating = false
+    @State var settingPage = false
     // @State var from: String
     // @State var to: String
 
@@ -109,11 +110,15 @@ struct HomePageView: View {
                     .cornerRadius(50)
                     
                     Button {
-                        //Setting Page
+                        settingPage.toggle()
                     } label: {
                         Image(systemName: "slider.horizontal.3")
                             .font(.system(size: 40))
                     }
+                    .sheet(isPresented: $settingPage) {
+                        SettingPageView()
+                    }
+
                 }
                 
             }
