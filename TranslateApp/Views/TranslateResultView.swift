@@ -212,7 +212,9 @@ struct TranslateResultView: View {
                                     .foregroundColor(.white)
                             }
                             .frame(width: (geometry.size.width - 40) / CGFloat(translateSources.count), height: 35)
+                            
                         }
+                        
                     }
                     .padding(.horizontal, 20) // 在此添加水平填充
                 }
@@ -314,7 +316,7 @@ struct TranslateResultView: View {
     .background(Color(UIColor.systemGray6))
     .cornerRadius(20)
     .edgesIgnoringSafeArea(.bottom)
-    // .onAppear(perform: fetchTranslations) // 假设您已经定义了这个函数
+    .onAppear(perform: fetchTranslations) // 假设您已经定义了这个函数
 }
 }
 

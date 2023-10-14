@@ -102,7 +102,13 @@ struct HomePageView: View {
             .onAppear {
                 self.rightLanguage = self.defaultLanguage
             }
-            .fullScreenCover(isPresented: $isTranslating) { 
+            .fullScreenCover(isPresented: $isTranslating) {
+            Image(systemName: "chevron.left")
+                    .foregroundColor(.blue)
+                    .offset(x: -160, y: 0)
+                    .onTapGesture {
+                        isTranslating.toggle()
+                    }
             TranslateResultView(originalText: originalText, leftLanguage: leftLanguage, rightLanguage: rightLanguage)
             }
     }

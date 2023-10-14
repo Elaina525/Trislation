@@ -15,6 +15,7 @@ struct HistoryPageView: View {
     @State private var selectedObjectID: UUID?
     @State var originalText = ""
     @State var previousOriginalText = ""
+    
     @State private var previousObjectID: UUID?
     @State var from = ""
     @State var to = ""
@@ -27,10 +28,11 @@ struct HistoryPageView: View {
         entity: TranslatedText.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \TranslatedText.date, ascending: false)]
     ) var translatedTexts: FetchedResults<TranslatedText>
-
+    
     @State private var offset: CGFloat = 0.0
 
     var body: some View {
+        
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(translatedTexts, id: \.self) { translatedText in
@@ -40,14 +42,19 @@ struct HistoryPageView: View {
                             guard let currentObjectIndex = translatedTexts.firstIndex(where: { $0.id == selectedObjectID }) else {
                                 return
                             }
+                            print(currentObjectIndex)
                             if currentObjectIndex > 0 {
                                 previousOriginalText = translatedTexts[currentObjectIndex - 1].original_text ?? ""
                                 previousObjectID = translatedTexts[currentObjectIndex - 1].id ?? nil
                             }
 
                             print(originalText)
+                            
+
                         }
                 }
+                Text(originalText)
+                    .hidden()
             }
             Spacer()
         }
@@ -117,6 +124,7 @@ struct HistoryPageView: View {
                 }
             }
         }
+        
     }
 
     func updateDetailData(_ translatedText: TranslatedText) {
@@ -126,6 +134,7 @@ struct HistoryPageView: View {
         to = translatedText.target_language ?? ""
         detailView = true
     }
+    
 
     struct HistoryPageView_Previews: PreviewProvider {
         static var previews: some View {

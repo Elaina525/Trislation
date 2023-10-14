@@ -45,8 +45,8 @@ struct TranslateTextRow: View {
 
                         Spacer()
 
-                        Image(systemName: data.favourite ? "heart.fill" : "heart")
-                            .foregroundColor(.red)
+                        Image(systemName: data.favourite ? "star.fill" : "star")
+                            .foregroundColor(.yellow)
                             .onTapGesture {
                                 data.favourite.toggle()
                                 do {
