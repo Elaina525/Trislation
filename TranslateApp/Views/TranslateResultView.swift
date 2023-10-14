@@ -54,29 +54,29 @@ struct TranslateResultView: View {
             return // 如果数据库中存在匹配的条目，直接返回
         }
 
-//        fetchTranslation(using: { text, completion in
-//            baiduTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
-//                completion(translatedText, error)
-//            }
-//        }) { baiduTranslatedText, _ in
-//            if let baiduTranslatedText = baiduTranslatedText {
-//                translatedText1 = baiduTranslatedText
-//                print("Baidu: \(translatedText1)")
-//                saveToDatabase()
-//            }
-//        }
+        fetchTranslation(using: { text, completion in
+            baiduTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
+                completion(translatedText, error)
+            }
+        }) { baiduTranslatedText, _ in
+            if let baiduTranslatedText = baiduTranslatedText {
+                translatedText1 = baiduTranslatedText
+                print("Baidu: \(translatedText1)")
+                saveToDatabase()
+            }
+        }
 
-         fetchTranslation(using: { text, completion in
-             googleTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
-                 completion(translatedText, error)
-             }
-         }) { googleTranslatedText, _ in
-             if let googleTranslatedText = googleTranslatedText {
-                 translatedText1 = googleTranslatedText
-                 print("Google: \(translatedText1)")
-                 saveToDatabase()
-             }
-         }
+//         fetchTranslation(using: { text, completion in
+//             googleTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
+//                 completion(translatedText, error)
+//             }
+//         }) { googleTranslatedText, _ in
+//             if let googleTranslatedText = googleTranslatedText {
+//                 translatedText1 = googleTranslatedText
+//                 print("Google: \(translatedText1)")
+//                 saveToDatabase()
+//             }
+//         }
 
         fetchTranslation(using: { text, completion in
             deeplTranslate(text: text, from: leftLanguage, to: rightLanguage) { translatedText, error in
