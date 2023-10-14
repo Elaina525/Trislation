@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab: Int = 0
-    @State private var settingPageIsPresented = false
 
     var topButtons: [String] = ["Translate", "History", "Favourites"]
 var body: some View {

@@ -14,7 +14,10 @@ struct SettingPageView: View {
     @State private var isAuthenticated = false
     @State var userProfile = Profile.empty
 
-    @AppStorage("DefaultLanguage") var defaultLanguage: String = "English"
+    @AppStorage("SourceLanguage") var sourceLanguage: String = "Auto"
+    @AppStorage("TargetLanguage") var targetLanguage: String = "English"
+    @AppStorage("OnDeviceRecognition") var onDeviceRecognition: Bool = true
+
     var languageOptions: [String] = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
 
     var body: some View {
@@ -46,13 +49,28 @@ struct SettingPageView: View {
                     }
                 }
 
+
                 Section(header: Text("Translate")) {
-                    Picker(selection: $defaultLanguage, label: Text("Default Language")) {
+
+                    Picker(selection: $sourceLanguage, label: Text("Source Language")) {
+                        Text("Auto")
+                        ForEach(languageOptions, id: \.self) { language in
+                            Text(language)
+                        }
+                    }
+
+                    Picker(selection: $targetLanguage, label: Text("Target Language")) {
                         ForEach(languageOptions, id: \.self) { language in
                             Text(language)
                         }
                     }
                 }
+
+                // toggle to enable on device recognition
+                Toggle(isOn: $onDeviceRecognition) {
+                    Text("On Device Recognition")
+                }
+
 
                 Section(header: Text("ABOUT")) {
                     HStack {

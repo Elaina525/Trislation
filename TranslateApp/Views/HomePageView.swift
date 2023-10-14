@@ -7,7 +7,9 @@ enum PageState {
 
 struct HomePageView: View {
     @StateObject private var speechToText = SpeechToText()
-    @AppStorage("DefaultLanguage") var defaultLanguage: String = "English"
+    @AppStorage("SourceLanguage") var sourceLanguage: String = "Auto"
+    @AppStorage("TargetLanguage") var targetLanguage: String = "English"
+
 
     @State var originalText: String = ""
     @State var leftLanguage: String = "Auto"
@@ -100,7 +102,8 @@ struct HomePageView: View {
             .cornerRadius(20)
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                self.rightLanguage = self.defaultLanguage
+                self.rightLanguage = self.targetLanguage
+                self.leftLanguage = self.sourceLanguage
             }
             .fullScreenCover(isPresented: $isTranslating) {
             Image(systemName: "chevron.left")

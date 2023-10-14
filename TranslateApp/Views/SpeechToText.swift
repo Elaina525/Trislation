@@ -19,6 +19,8 @@ class SpeechToText: ObservableObject {
     @Published var transcript = ""
     private var lastTranscript = ""
 
+    @AppStorage("OnDeviceRecognition") var onDeviceRecognition: Bool = true
+
     func toggleRecording() {
         if isRecording {
             audioEngine.stop()
@@ -45,27 +47,28 @@ class SpeechToText: ObservableObject {
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        if let recognizer = speechRecognizer, recognizer.supportsOnDeviceRecognition {
-    recognitionRequest?.requiresOnDeviceRecognition = true
-}
-
+        if onDeviceRecognition {
+            if let recognizer = speechRecognizer, recognizer.supportsOnDeviceRecognition {
+                recognitionRequest?.requiresOnDeviceRecognition = true
+            }
+        }
         guard let recognitionRequest = recognitionRequest else { return }
 
         let inputNode = audioEngine.inputNode
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { result, error in
-    if let result = result {
-        DispatchQueue.main.async {
-            let newTranscript = result.bestTranscription.formattedString
-            if self.lastTranscript != newTranscript {
-                let newContent = String(newTranscript.dropFirst(self.lastTranscript.count))
-                self.transcript += " " + newContent
-                self.lastTranscript = newTranscript
+            if let result = result {
+                DispatchQueue.main.async {
+                    let newTranscript = result.bestTranscription.formattedString
+                    if self.lastTranscript != newTranscript {
+                        let newContent = String(newTranscript.dropFirst(self.lastTranscript.count))
+                        self.transcript += " " + newContent
+                        self.lastTranscript = newTranscript
+                    }
+                }
+            } else if let error = error {
+                print("Recognition error: \(error)")
             }
-        }
-    } else if let error = error {
-        print("Recognition error: \(error)")
-    }
-})
+        })
 
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
