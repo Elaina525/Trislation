@@ -21,7 +21,11 @@ class SpeechToText: ObservableObject {
 
     @AppStorage("OnDeviceRecognition") var onDeviceRecognition: Bool = true
 
-    func toggleRecording() {
+    func toggleRecording(language: String) {
+
+        languageChange(language: language)
+        
+
         if isRecording {
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -34,6 +38,17 @@ class SpeechToText: ObservableObject {
             }
         }
         isRecording.toggle()
+    }
+
+    private func languageChange(language: String) {
+        let languages_long = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
+        let languages_short = ["en_US", "es_ES", "fr_FR", "de_DE", "zh_CN", "ja_JP", "ru_RU", "ar_SA"]
+
+        if language == "Auto" {
+            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
+        } else {
+            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: languages_short[languages_long.firstIndex(of: language)!]))
+        }
     }
 
     private func startRecording() throws {

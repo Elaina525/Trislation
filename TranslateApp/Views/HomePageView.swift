@@ -39,7 +39,7 @@ struct HomePageView: View {
                 Spacer()
 
                 Button {
-                    speechToText.toggleRecording()
+                    speechToText.toggleRecording(leftLanguage)
                     originalText = speechToText.transcript
                     if speechToText.isRecording == false {
                         speechToText.transcript = ""
