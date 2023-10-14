@@ -1,6 +1,7 @@
 import CryptoKit
 import SwiftUI
 
+class BaiduTranslateModel: ObservableObject {
     func baiduTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
         let appid = "20200426000430988"
         let secretKey = "s4MllyEWiYSeCyffV9Ab"
@@ -47,6 +48,21 @@ import SwiftUI
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
         return digest.map { String(format: "%02hhx", $0) }.joined()
     }
+    
+    fileprivate func convertToShortLanguage(_ fullLanguage: String) -> String {
+        let languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
+        let shortLanguages = ["en", "spa", "fra", "de", "zh", "jp", "ru", "ara"]
+
+        if fullLanguage == "Auto" {
+            return "auto"
+        }
+        let index = languages.firstIndex(of: fullLanguage) ?? 0
+        return shortLanguages[index]
+    }
+}
+
+
+    
 
 
 extension Dictionary {
@@ -62,16 +78,7 @@ extension Dictionary {
     }
 }
 
-fileprivate func convertToShortLanguage(_ fullLanguage: String) -> String {
-    let languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
-    let shortLanguages = ["en", "spa", "fra", "de", "zh", "jp", "ru", "ara"]
 
-    if fullLanguage == "Auto" {
-        return "auto"
-    }
-    let index = languages.firstIndex(of: fullLanguage) ?? 0
-    return shortLanguages[index]
-}
 
 
 struct BaiduTranslation: Codable {

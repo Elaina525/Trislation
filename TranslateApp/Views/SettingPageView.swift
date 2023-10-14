@@ -48,10 +48,7 @@ struct SettingPageView: View {
                         }
                     }
                 }
-
-
-                Section(header: Text("Translate")) {
-
+                Section(header: Text("Translate"), footer: Text("This setting will take effect the next time you launch the app.")) {
                     Picker(selection: $sourceLanguage, label: Text("Source Language")) {
                         Text("Auto")
                         ForEach(languageOptions, id: \.self) { language in
@@ -67,23 +64,25 @@ struct SettingPageView: View {
                 }
 
                 // toggle to enable on device recognition
-                Section(header: Text("Speech detect"), footer: Text("123")) {
+                Section(header: Text("speech recognition"), footer: Text("Enabling on-device recognition enhances privacy and reduces latency. Disabling it will rely on cloud-based recognition which is more accurate.")) {
                     Toggle(isOn: $onDeviceRecognition) {
                         Text("On Device Recognition")
                     }
                 }
 
-                Section(header: Text("ABOUT")) {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("2.2.1")
-                    }
-                }
+                // Section(header: Text("ABOUT")) {
+                //     HStack {
+                //         Text("Version")
+                //         Spacer()
+                //         Text("2.2.1")
+                //     }
+                // }
 
                 Section {
                     Button(action: {
-                        print("Perform an action here...")
+                        self.sourceLanguage = "Auto"
+                        self.targetLanguage = "English"
+                        self.onDeviceRecognition = true
                     }) {
                         Text("Reset All Settings")
                     }
@@ -96,8 +95,14 @@ struct SettingPageView: View {
                 Text("Done")
             })
         }
-
-        
+        .onAppear(
+            perform: {
+                if let idToken = UserDefaults.standard.string(forKey: "idToken") {
+                    self.isAuthenticated = true
+                    self.userProfile = Profile.from(idToken)
+                }
+            }
+        )
     }
 
     struct UserImage: View {
@@ -168,6 +173,8 @@ extension SettingPageView {
                     self.userProfile = Profile.from(credentials.idToken)
                     print("Credentials: \(credentials)")
                     print("ID token: \(credentials.idToken)")
+                    // save to app storage
+                    UserDefaults.standard.set(credentials.idToken, forKey: "idToken")
                 }
             }
     }
@@ -180,6 +187,9 @@ extension SettingPageView {
                 case .success:
                     self.isAuthenticated = false
                     self.userProfile = Profile.empty
+                    print("Logged out!")
+                    // remove from app storage
+                    UserDefaults.standard.removeObject(forKey: "idToken")
 
                 case let .failure(error):
                     print("Failed with: \(error)")
