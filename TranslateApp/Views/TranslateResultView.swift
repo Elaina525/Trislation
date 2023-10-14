@@ -301,7 +301,7 @@ struct TranslateResultView: View {
                 }
                 
                 Button {
-                    speechToText.toggleRecording()
+                    speechToText.toggleRecording(language: leftLanguage)
                     originalText = speechToText.transcript
                     if speechToText.isRecording == false {
                         speechToText.transcript = ""
