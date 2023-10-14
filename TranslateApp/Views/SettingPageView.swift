@@ -67,10 +67,11 @@ struct SettingPageView: View {
                 }
 
                 // toggle to enable on device recognition
-                Toggle(isOn: $onDeviceRecognition) {
-                    Text("On Device Recognition")
+                Section(header: Text("Speech detect"), footer: Text("123")) {
+                    Toggle(isOn: $onDeviceRecognition) {
+                        Text("On Device Recognition")
+                    }
                 }
-
 
                 Section(header: Text("ABOUT")) {
                     HStack {
