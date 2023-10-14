@@ -247,26 +247,7 @@ struct TranslateResultView: View {
 
         Spacer()
         VStack {
-            Button {
-                speechToText.toggleRecording()
-                originalText = speechToText.transcript
-                if speechToText.isRecording == false {
-                    speechToText.transcript = ""
-                    translatedText1 = ""
-                    translatedText2 = ""
-                    translatedText3 = ""
-                    fetchTranslations()
-                }
-
-            } label: {
-                Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
-                    .resizable()
-                    .frame(width: 35, height: 50)
-            }
-            .frame(width: 100, height: 100)
-            .foregroundColor(.white)
-            .background(.blue)
-            .cornerRadius(50)
+            
 
             HStack {
                 // Language Switching
@@ -307,6 +288,46 @@ struct TranslateResultView: View {
                 }
             }
             .padding()
+            
+            HStack(spacing: 35) {
+                
+                Button {
+                    isFavourite.toggle()
+                } label: {
+                    Image(systemName: isFavourite ? "star.fill" : "star")
+                        .foregroundColor(.yellow)
+                        .font(.system(size: 40))
+                }
+                
+                Button {
+                    speechToText.toggleRecording()
+                    originalText = speechToText.transcript
+                    if speechToText.isRecording == false {
+                        speechToText.transcript = ""
+                        translatedText1 = ""
+                        translatedText2 = ""
+                        translatedText3 = ""
+                        fetchTranslations()
+                    }
+
+                } label: {
+                    Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
+                        .resizable()
+                        .frame(width: 28, height: 40)
+                }
+                .frame(width: 100, height: 100)
+                .foregroundColor(.white)
+                .background(.blue)
+                .cornerRadius(50)
+                
+                Button {
+                    //Setting Page
+                } label: {
+                    Image(systemName: "slider.horizontal.3")
+                        .font(.system(size: 40))
+                }
+            }
+            
             Text(translatedText1)
                 .font(.system(size: 1))
                 .hidden()

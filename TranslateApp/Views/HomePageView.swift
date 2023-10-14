@@ -38,23 +38,7 @@ struct HomePageView: View {
 
                 Spacer()
 
-                Button {
-                    speechToText.toggleRecording(leftLanguage)
-                    originalText = speechToText.transcript
-                    if speechToText.isRecording == false {
-                        speechToText.transcript = ""
-                        isTranslating.toggle()
-                    }
-
-                } label: {
-                    Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
-                        .resizable()
-                        .frame(width: 35, height: 50)
-                }
-                .frame(width: 100, height: 100)
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(50)
+                
 
                 HStack {
                     // Language Switching
@@ -95,6 +79,43 @@ struct HomePageView: View {
                     }
                 }
                 .padding()
+                
+                HStack(spacing: 35) {
+                    
+                    Button {
+                        //Nothing
+                    } label: {
+                        Image(systemName: "star")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 40))
+                    }
+                    
+                    Button {
+                        speechToText.toggleRecording()
+                        originalText = speechToText.transcript
+                        if speechToText.isRecording == false {
+                            speechToText.transcript = ""
+                            isTranslating.toggle()
+                        }
+
+                    } label: {
+                        Image(systemName: speechToText.isRecording ? "mic.slash.fill" : "mic.fill")
+                            .resizable()
+                            .frame(width: 28, height: 40)
+                    }
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.white)
+                    .background(.blue)
+                    .cornerRadius(50)
+                    
+                    Button {
+                        //Setting Page
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .font(.system(size: 40))
+                    }
+                }
+                
             }
             // add rounded corner on top
             .padding()
