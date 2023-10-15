@@ -10,6 +10,7 @@ to provide 3 different version of translation results, so that users are able to
 - Switch between languages with ease.
 - Enable on-device speech recognition for privacy and reduced latency.
 
-Our Figma link: https://www.figma.com/file/STxZxWpsuos9hIIAiGUAit/iPSE?type=design&node-id=0-1&mode=design&t=WtTVVOegkerPlook-0
+## Other
 
+Our Figma link: https://www.figma.com/file/STxZxWpsuos9hIIAiGUAit/iPSE?type=design&node-id=0-1&mode=design&t=WtTVVOegkerPlook-0
 Our Miro link: https://miro.com/app/board/uXjVMs0Hhhc=/?share_link_id=770386083446#tpicker-content
