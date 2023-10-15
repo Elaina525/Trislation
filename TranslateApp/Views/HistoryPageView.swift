@@ -8,6 +8,26 @@
 import CoreData
 import SwiftUI
 
+/// A view for the history page of Trislation.
+/**
+ `HistoryPageView.swift` is a SwiftUI view file that represents the history page of the translation app. This view displays a list of previously translated text entries stored in the CoreData database. Users can select and view the details of individual translation entries by tapping on them. It also provides swipe gestures for navigating between translations.
+
+ - Note:
+    This view leverages CoreData to fetch and display previously translated text entries and allows users to navigate through their translation history.
+
+ - Requires:
+    - `TranslateTextRow` for displaying each translation entry.
+    - `TranslatedText` CoreData entity for storing translation data.
+    - `TranslateResultView` for displaying translation results.
+    - Gesture recognition for swipe navigation.
+
+ - Important Elements:
+    - A list displaying previously translated text entries.
+    - A full-screen cover for viewing detailed translation results.
+    - Swipe gestures for navigating between translations.
+    - Navigation buttons for returning to the previous screen.
+ */
+
 struct HistoryPageView: View {
     // 使用 @FetchRequest 从 CoreData 获取 TranslatedText 实体
     @State var detailView = false

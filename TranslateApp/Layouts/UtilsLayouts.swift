@@ -8,11 +8,13 @@
 import CoreData
 import SwiftUI
 
+/// A SwiftUI view for layout utility.
 struct UtilsLayouts: View {
     var body: some View {
-        // for test
+        // This is the main view for layout utilities
 
         CustomVerticalLayout {
+            // You can place other views here
             // TranslateTextRow(data: TranslatedText())
         }
     }
@@ -24,13 +26,15 @@ struct UtilsLayouts_Previews: PreviewProvider {
     }
 }
 
+/// A container for translations, displaying original and translated text.
 struct TranslateTextRow: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var data: TranslatedText
-    
 
     var body: some View {
         Spacer()
+
+        // A rounded rectangle with some styling
         RoundedRectangle(cornerRadius: 20)
             .stroke(style: StrokeStyle(lineWidth: 2))
             .frame(width: 350, height: 100)
@@ -38,6 +42,7 @@ struct TranslateTextRow: View {
             .overlay {
                 VStack(spacing: 10) {
                     HStack {
+                        // Display the original text
                         Text(data.original_text ?? "未知")
                             .font(.system(size: 16))
                             .foregroundColor(.black)
@@ -45,14 +50,15 @@ struct TranslateTextRow: View {
 
                         Spacer()
 
+                        // Display a star icon to toggle "favorite" status
                         Image(systemName: data.favourite ? "star.fill" : "star")
                             .foregroundColor(.yellow)
                             .onTapGesture {
                                 data.favourite.toggle()
                                 do {
-                                    try self.managedObjectContext.save() // 添加这一行
+                                    try self.managedObjectContext.save() // Save changes to Core Data
                                 } catch {
-                                    // 处理保存错误
+                                    // Handle save errors
                                     print(error.localizedDescription)
                                 }
                             }
@@ -62,6 +68,7 @@ struct TranslateTextRow: View {
                         .background(Color.gray)
                         .frame(height: 1)
 
+                    // Display the translated text
                     Text(data.translated_text1 ?? "未知")
                         .font(.system(size: 16))
                         .foregroundColor(.black)
@@ -73,6 +80,7 @@ struct TranslateTextRow: View {
     }
 }
 
+/// A custom vertical layout for arranging subviews.
 struct CustomVerticalLayout: Layout {
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
         var size = CGSize.zero
@@ -81,7 +89,7 @@ struct CustomVerticalLayout: Layout {
             size.width = max(size.width, subviewSize.width)
             size.height += subviewSize.height
         }
-        size.height += CGFloat(subviews.count - 1) * 1.0 // add spacing between subviews
+        size.height += CGFloat(subviews.count - 1) * 1.0 // Add spacing between subviews
         return size
     }
 
@@ -91,7 +99,7 @@ struct CustomVerticalLayout: Layout {
             let subviewSize = subview.sizeThatFits(proposal)
             let subviewFrame = CGRect(x: 0, y: yPosition, width: subviewSize.width, height: subviewSize.height)
             subview.place(at: subviewFrame.origin, anchor: .topLeading, proposal: .unspecified)
-            yPosition += subviewSize.height + 5.0 // add spacing between subviews
+            yPosition += subviewSize.height + 5.0 // Add spacing between subviews
         }
     }
 }

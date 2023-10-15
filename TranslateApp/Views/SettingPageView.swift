@@ -8,6 +8,38 @@
 import Auth0
 import SwiftUI
 
+/// A view for the setting page of Trislation.
+
+/**
+ SettingPageView.swift
+ TranslateApp
+
+ This SwiftUI view is responsible for displaying the app's settings and user account management. It provides a user interface to adjust language preferences, enable on-device speech recognition, and manage user account information. Users can log in, log out, and reset their settings. The view also displays user account information if logged in.
+
+ Key Features:
+ - Account management with options to log in and log out.
+ - Language settings for source and target languages used in translations.
+ - Option to enable or disable on-device speech recognition.
+ - User interface components, such as pickers and toggles, for user customization.
+ - Resetting all settings to default values.
+ - Profile image display for authenticated users.
+
+ Parameters:
+ - presentationMode: An environment value for controlling the presentation mode.
+ - isAuthenticated: A boolean flag indicating whether the user is authenticated.
+ - userProfile: User profile information, including name and email.
+ - sourceLanguage: A selected source language for translations.
+ - targetLanguage: A selected target language for translations.
+ - onDeviceRecognition: A toggle to enable or disable on-device speech recognition.
+ - languageOptions: A list of language options available for selection.
+ - UserImage: A nested view for displaying user profile images.
+ - login: A function to log in the user.
+ - logout: A function to log out the user.
+
+ The SettingPageView enhances user experience by allowing customization of language preferences, speech recognition settings, and user account management within the translation app.
+ */
+
+
 struct SettingPageView: View {
     @Environment(\.presentationMode) var presentationMode
 

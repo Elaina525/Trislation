@@ -8,6 +8,35 @@
 import CoreData
 import SwiftUI
 
+/// A view for the favourite page of Trislation.
+/**
+ FavouritesPageView.swift
+ TranslateApp
+
+ This SwiftUI view is responsible for displaying users' favorite translations in the translation app. It presents a list of previously translated text entries marked as favorites, allowing users to select individual entries for detailed viewing. Users can navigate through the list of favorite translations using swipe gestures. CoreData is used to fetch and display saved translations marked as favorites.
+
+ Key Features:
+ - Display of a list showing previously translated text entries marked as favorites.
+ - Full-screen cover for viewing detailed translation results.
+ - Support for swipe gestures to navigate between translations.
+ - Navigation buttons to return to the previous screen.
+
+ Parameters:
+ - detailView: A boolean flag to control the detail view's visibility.
+ - selectedObjectID: A UUID to identify the selected translation entry.
+ - originalText: The original text of the selected translation.
+ - previousOriginalText: The original text of the previous translation entry.
+ - from: The source language of the translation entry.
+ - to: The target language of the translation entry.
+ - translateSources: A list of translation sources (e.g., "Baidu," "DeepL," "Azure").
+ - selectedTab: An integer indicating the selected tab or view.
+ - isFavourite: A boolean flag to identify whether a translation entry is marked as a favorite.
+
+ - Requires CoreData to manage and fetch favorite translations.
+
+ This view enhances the translation app's user experience by allowing users to conveniently manage and view their favorite translations.
+ */
+
 struct FavouritesPageView: View {
     // 使用 @FetchRequest 从 CoreData 获取 TranslatedText 实体
     @State var detailView = false

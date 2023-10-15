@@ -8,6 +8,50 @@
 import CoreData
 import SwiftUI
 
+
+/**
+ TranslateResultView.swift
+ TranslateApp
+
+ This SwiftUI view is responsible for displaying translation results, allowing users to enter text for translation, and managing translation settings. Users can switch languages, mark translations as favorites, control speech recognition, and access the settings page. The view provides real-time translation for the entered text using multiple translation sources.
+
+ Key Features:
+ - Text input for translation.
+ - Real-time translation using Google, DeepL, and Azure translation sources.
+ - Language switching and automatic detection of source language.
+ - Marking translations as favorites.
+ - Speech recognition with a microphone button for voice input.
+ - Access to the settings page for language customization and user management.
+
+ Parameters:
+ - managedObjectContext: The CoreData managed object context for data storage.
+ - speechToText: An instance of the SpeechToText class for speech recognition.
+ - originalText: The text to be translated.
+ - translatedText1: Translation result from the first source.
+ - translatedText2: Translation result from the second source.
+ - translatedText3: Translation result from the third source.
+ - selectedTab: The selected translation source tab.
+ - isFavourite: A flag to indicate whether the translation is marked as a favorite.
+ - settingPage: A flag for displaying the settings page.
+ - leftLanguage: The selected source language.
+ - rightLanguage: The selected target language.
+ - translateSources: Available translation sources (Google, DeepL, Azure).
+ - languages: Supported languages for translation.
+ - shortLanguages: Short language codes.
+ - leftLanguageOptions: Options for the source language picker.
+ - rightLanguageOptions: Options for the target language picker.
+
+ Functions:
+ - fetchTranslation(using:completion:): A generic function to fetch translations using a given translation function and handle errors.
+ - fetchTranslations(): Fetches translations from multiple sources and saves them to the database.
+ - checkDatabase(): Checks if the translation is already present in the database.
+ - updateFavouriteInDatabase(): Updates the favorite status in the database.
+ - saveToDatabase(): Saves the translation to the database.
+
+ The TranslateResultView enhances user experience by providing real-time translation, language customization, and user-friendly controls for speech recognition and favorite management within the translation app.
+ */
+
+
 struct TranslateResultView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext // 获取 managedObjectContext

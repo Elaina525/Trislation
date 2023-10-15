@@ -9,27 +9,30 @@ import AVFoundation
 import Speech
 import SwiftUI
 
+/// A class for handling speech-to-text conversion and recognition.
 class SpeechToText: ObservableObject {
-    var audioEngine = AVAudioEngine()
-    var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
-    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    var recognitionTask: SFSpeechRecognitionTask?
+    var audioEngine = AVAudioEngine()  // Audio engine for recording
+    var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))  // Speech recognition engine
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?  // Request for speech recognition
+    var recognitionTask: SFSpeechRecognitionTask?  // Task for handling speech recognition
 
-    @Published var isRecording = false
-    @Published var transcript = ""
-    private var lastTranscript = ""
+    @Published var isRecording = false  // Indicates whether recording is in progress
+    @Published var transcript = ""  // The recognized speech transcript
+    private var lastTranscript = ""  // Store the previous transcript to update the current one
 
-    @AppStorage("OnDeviceRecognition") var onDeviceRecognition: Bool = true
+    @AppStorage("OnDeviceRecognition") var onDeviceRecognition: Bool = true  // Setting for on-device recognition
 
+    /// Toggle the recording of speech.
+    ///
+    /// - Parameter language: The target language for speech recognition.
     func toggleRecording(language: String) {
 
         languageChange(language: language)
-        
 
         if isRecording {
             audioEngine.stop()
             recognitionRequest?.endAudio()
-            audioEngine.inputNode.removeTap(onBus: 0) // 移除 tap
+            audioEngine.inputNode.removeTap(onBus: 0) // Remove tap for audio input
         } else {
             do {
                 try startRecording()
@@ -37,9 +40,12 @@ class SpeechToText: ObservableObject {
                 print("Could not start recording: \(error)")
             }
         }
-        isRecording.toggle()
+        isRecording.toggle()  // Toggle the recording state
     }
 
+    /// Change the language for speech recognition.
+    ///
+    /// - Parameter language: The target language for speech recognition.
     func languageChange(language: String) {
         let languages_long = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
         let languages_short = ["en_US", "es_ES", "fr_FR", "de_DE", "zh_CN", "ja_JP", "ru_RU", "ar_SA"]
@@ -51,6 +57,7 @@ class SpeechToText: ObservableObject {
         }
     }
 
+    /// Start the recording of speech.
     func startRecording() throws {
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()

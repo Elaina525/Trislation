@@ -1,10 +1,22 @@
 import SwiftUI
 
-enum PageState {
-    case home
-    case translating(String)
-}
+/// A view for the home page of Trislation.
+/**
+ `HomePageView.swift` is a SwiftUI view file that represents the home page of the translation app. This view allows users to enter text for translation, select source and target languages, and initiate the translation process. It also includes options for recording speech input, accessing settings, and managing favorite translations.
 
+ - Note:
+    This view interacts with the app's data and settings, including the source and target languages, and provides a user-friendly interface for translating text and managing translation preferences.
+
+ - Requires:
+    - `SpeechToText` for speech recognition and recording.
+    - AppStorage for managing source and target language settings.
+
+ - Important Elements:
+    - Text field for entering text to be translated.
+    - Pickers for selecting source and target languages.
+    - Buttons for recording speech input, accessing settings, and managing favorite translations.
+    - Full-screen cover for displaying translation results.
+ */
 struct HomePageView: View {
     @StateObject private var speechToText = SpeechToText()
     @AppStorage("SourceLanguage") var sourceLanguage: String = "Auto"
@@ -15,8 +27,6 @@ struct HomePageView: View {
     @State var rightLanguage: String = "English"
     @State var isTranslating = false
     @State var settingPage = false
-    // @State var from: String
-    // @State var to: String
 
     var translateSources = ["Baidu", "DeepL", "Azure"]
     var languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Russian", "Arabic"]
@@ -24,9 +34,6 @@ struct HomePageView: View {
     var rightLanguageOptions: [String] { languages.filter { $0 != leftLanguage } }
 
     var body: some View {
-        //        switch currentPage {
-        //        case .home:
-
         VStack {
             TextField("Type here", text: $originalText)
                 .padding()
@@ -134,9 +141,9 @@ struct HomePageView: View {
                 }) {
                     HStack {
                         Image(systemName: "chevron.left")
-                            .foregroundColor(.blue) // 保持与原始代码的颜色一致
+                            .foregroundColor(.blue) // Keep the same color as the original code
                         Text("Back")
-                            .foregroundColor(.blue) // 使文本颜色与图标颜色相匹配
+                            .foregroundColor(.blue) // Match text color to icon color
                     }
                 }
                 .offset(x: -160, y: 0)
