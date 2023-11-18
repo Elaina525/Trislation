@@ -18,7 +18,7 @@ class DeeplTranslateModel {
     ///   - to: The target language.
     ///   - completion: A closure to handle the translation result or error.
     func deeplTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
-        let authKey = "fa3a4185-93ae-75b4-e19b-3d0181aba823:fx"
+        let authKey = ""
         let url = URL(string: "https://api-free.deepl.com/v2/translate")!
 
         var request = URLRequest(url: url)
