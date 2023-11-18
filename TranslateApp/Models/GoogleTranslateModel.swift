@@ -16,7 +16,7 @@ class GoogleTranslateModel {
     ///   - to: The target language.
     ///   - completion: A closure to handle the translation result or error.
     func googleTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
-        let authKey = "AIzaSyDENfMZiBIBggzfp1WAi7ysnKpHfGeIbHk"
+        let authKey = ""
         let url = URL(string: "https://translation.googleapis.com/language/translate/v2")!
 
         var request = URLRequest(url: url)
