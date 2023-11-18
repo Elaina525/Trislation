@@ -13,7 +13,7 @@ class BaiduTranslateModel: ObservableObject {
     ///   - to: The target language.
     ///   - completion: A closure to handle the translation result or error.
     func baiduTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
-        let appid = "20200426000430988"
+        let appid = ""
         let secretKey = "s4MllyEWiYSeCyffV9Ab"
         let salt = String(arc4random_uniform(65536))
 
