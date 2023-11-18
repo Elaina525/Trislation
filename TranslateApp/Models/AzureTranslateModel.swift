@@ -16,7 +16,7 @@ class AzureTranslateModel {
     ///   - to: The target language.
     ///   - completion: A closure to handle the translation result or error.
     func azureTranslate(text: String, from: String, to: String, completion: @escaping (String?, Error?) -> Void) {
-        let key = "48ccaa82136d4a59a6f58d9291149911"
+        let key = ""
         let region = "australiaeast"
         let endpoint = "https://api.cognitive.microsofttranslator.com"
         let url: URL
